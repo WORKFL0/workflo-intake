@@ -12,44 +12,78 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
         const good: string[] = [];
         const attention: string[] = [];
 
-        // Analyze Security
+        // Security - Local Admin
         if (formData['q_admin1']?.includes('Geen Local Admin')) {
-            good.push("Veilig Apparaatbeheer: Gebruikers hebben geen admin rechten, top voor security.");
+            good.push("Veilig Apparaatbeheer: Gebruikers hebben geen admin rechten, perfect voor security.");
         } else if (formData['q_admin1']) {
             currentScore -= 15;
-            attention.push("Local Admin Rechten: Dit geeft gebruikers veel vrijheid, maar aanzienlijk meer risico op malware en herstelkosten buiten scope.");
+            attention.push("Local Admin Rechten: Dit geeft gebruikers veel vrijheid, maar aanzienlijk meer risico op malware en herstelkosten buiten de vaste fee.");
+        } else {
+            currentScore -= 15;
+            attention.push("Ongedefinieerd (Local Admin): Er is niet gekozen wie rechten krijgt om applicaties te installeren. Risico op ongecontroleerde schaduw-IT.");
         }
 
+        // Security - MFA
         if (formData['q25']?.includes('100% mee eens')) {
-            good.push("Identiteit & Toegang: MFA is verplicht voor iedereen.");
+            good.push("Identiteit & Toegang: MFA is verplicht gesteld voor iedereen.");
+        } else {
+            currentScore -= 15;
+            attention.push("Ongedefinieerd (MFA): Geen keuze gemaakt over MFA (Tweestapsverificatie). Dit is momenteel de #1 oorzaak van gehackte Microsoft 365 accounts.");
         }
 
-        // Analyze Backup
+        // Backup
         if (formData['q37']?.includes('Cloud Backup is vitaal')) {
-            good.push("Data Veiligheid: Cloud Backup is direct gekozen voor maximale zekerheid.");
+            good.push("Data Veiligheid: Cloud Backup is direct gekozen voor zekerheid en ransomware bescherming.");
         } else if (formData['q37']) {
             currentScore -= 20;
-            attention.push("Data Veiligheid (Kritiek): Er is gekozen om géén Cloud Backup te nemen. Enkel de prullenbak van Microsoft/Google is aanwezig.");
+            attention.push("Data Veiligheid (Kritiek): Er is gekozen om géén Cloud Backup te nemen. Enkel de 30-dagen prullenbak is aanwezig.");
+        } else {
+            currentScore -= 20;
+            attention.push("Ongedefinieerd (Cloud Backup): Geen beleid gekozen over Cloud Data bescherming. Zonder actieve backup lopen jullie ernstig risico bij ransomware.");
         }
 
-        // Analyze Hardware / Purchasing
+        // Hardware / Purchasing
         if (formData['q9']?.includes('alles via Workflo te bestellen')) {
-            good.push("Standaardisatie Hardware: Apparaten worden direct beheerd geleverd (Zero Touch) zonder extra uren.");
+            good.push("Standaardisatie Hardware: Apparaten worden direct beheerd geleverd (Zero Touch) zonder extra configuratie-uren.");
         } else if (formData['q9']?.includes('We accepteren de extra handelingstijd')) {
             currentScore -= 5;
-            attention.push("Eigen Hardware Aanschaf: Houd rekening met een kleine opslag voor het handmatig koppelen van apparaten die elders zijn gekocht.");
+            attention.push("Eigen Hardware Aanschaf: Houd rekening met een billable opslag (0,5u) voor het handmatig in beheer nemen van externe apparaten.");
+        } else {
+            currentScore -= 5;
+            attention.push("Ongedefinieerd (Aanschaf & Zero Touch): Er is niet nagedacht over het aanleveringsproces van bedrijfs-apparatuur.");
         }
 
+        // Hardware Lifecycle
         if (formData['q11']?.includes('3 jaar') || formData['q11']?.includes('4 jaar')) {
             good.push("Hardware Lifecycle: Er is een duidelijke hardware afschrijving gekozen (3 tot 4 jaar).");
         } else if (formData['q11']) {
             currentScore -= 10;
-            attention.push("Hardware Lifecycle: Pas vervangen bij defecten verhoogt risico op acute downtime. Niet gedekt in fixed fee als toestel End-of-Life was.");
+            attention.push("Hardware Lifecycle: Apparaten pas vervangen bij defecten verhoogt risico op acute downtime. Dit valt buiten scope na 'End-of-Life'.");
+        } else {
+            currentScore -= 10;
+            attention.push("Ongedefinieerd (Apparaat Levensduur): Oude apparaten brengen veiligheidsrisico's en trage prestaties mee. Geen policy over vastgesteld.");
         }
 
-        // Analyze Networking
+        // On/Offboarding
+        if (!formData['q1'] || formData['q1'].trim() === '') {
+            currentScore -= 5;
+            attention.push("Ongedefinieerd (Offboarding): Er is geen persoon aangewezen die doorgifte doet van vertrekkende collega's (risico op doorlopende weeskosten).");
+        } else {
+            good.push("On/Offboarding: Er is een vast aanspreekpunt voor licentie-afmeldingen.");
+        }
+
+        if (!formData['q6']) {
+            currentScore -= 5;
+            attention.push("Ongedefinieerd (Minimale Opzegtermijn Onboarding): Geen aanlevertermijn voor introducties vastgesteld. Kan leiden tot falende leveringen op de eerste werkdag.");
+        } else if (formData['q6']?.includes('5 werkdagen') || formData['q6']?.includes('10 werkdagen')) {
+            good.push(`Onboarding Timing: ${formData['q6']}. Geweldig voor soepele hardware/software voorbereiding!`);
+        } else {
+            // Spoed
+            attention.push("Spoed Onboardings: Jullie verwachten frequente snelle opstart. Hou hiermee rekening op onvoorziene knelpunten en extra opslagen.");
+        }
+
         if (formData['q39']?.includes('alles onder één warm dak')) {
-            good.push("Kantoor Netwerk: Beheer van lokale netwerk-hardware is ondergebracht bij Workflo voor end-to-end support.");
+            good.push("Kantoor Netwerk: Beheer van lokale netwerk-hardware is toevertrouwd aan Workflo voor end-to-end zichtbaarheid.");
         }
 
         // Cap score between 0 and 100
