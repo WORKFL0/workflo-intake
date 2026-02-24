@@ -177,7 +177,7 @@ export const formSections: Section[] = [
             {
                 id: "q17",
                 label: "Prioriteiten (SLA's) Policy",
-                desc: "Onze SLA (Service Level Agreement) dekt urgente (P1) zaken veel sneller af dan 'wensen' (P3). Zullen we de P-structuur samen doornemen voor het contract in gaat?",
+                desc: "Onze SLA (Service Level Agreement) dekt urgente (P1) zaken veel sneller af dan 'wensen' (P3). Zie {{SLA}} voor de exacte uitleg van onze prioriteiten. Zullen we dit nog samen doornemen voordat het contract in gaat?",
                 type: "radio",
                 options: [
                     "We hebben de responstijden gelezen en zijn er mee akkoord.",
@@ -223,7 +223,7 @@ export const formSections: Section[] = [
             {
                 id: "q_admin1",
                 label: "Lokale Administrator Rechten (Mogen gebruikers zelf installeren?)",
-                desc: "Als gebruikers Local Admin zijn, kunnen ze naar wens software installeren. Echter kunnen zij zo (onbewust) malware binnenhalen of hun OS om zeep helpen. Herstelwerkzaamheden door dit soort lokale wijzigingen vallen niet binnen de vaste (fixed) fee. Waar gaat jullie voorkeur naar uit?",
+                desc: "Als gebruikers Local Admin zijn, kunnen ze naar wens software installeren. Echter kunnen zij zo (onbewust) malware binnenhalen of hun computer om zeep helpen. Herstelwerkzaamheden door dit soort wijzigingen vallen niet binnen de vaste fee (zie hiervoor ook {{SLA}}). Waar gaat jullie voorkeur naar uit?",
                 type: "radio",
                 options: [
                     "Geen Local Admin voor gebruikers. (Workflo beheert applicaties veilig op afstand).",
@@ -384,7 +384,7 @@ export const formSections: Section[] = [
             {
                 id: "q51",
                 label: "De grens van All-in (Fair Use Policy)",
-                desc: "Onze vaste fee is op vertrouwen gebaseerd. Mocht een collega stelselmatig excessief ondersteuning vragen op basale applicatie-(how to) niveau, dan plannen we een gesprek over wellicht wat betaalde training. Gaan we hier op dezelfde manier mee om?",
+                desc: "Onze vaste fee is op vertrouwen gebaseerd, zoals beschreven onder Fair Use in {{SLA}}. Mocht een collega stelselmatig excessief ondersteuning vragen op basale applicatie-(how to) niveau, dan plannen we een gesprek over wellicht wat betaalde training. Gaan we hier op dezelfde manier mee om?",
                 type: "radio",
                 options: [
                     "Ja, we hanteren redelijkheid en waarderen meedenken bij zware belasting."

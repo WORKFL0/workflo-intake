@@ -44,6 +44,27 @@ function App() {
         })
     }
 
+    const renderDesc = (desc: string) => {
+        if (!desc.includes('{{SLA}}')) return desc;
+        const parts = desc.split('{{SLA}}');
+        return (
+            <>
+                {parts[0]}
+                <button
+                    type="button"
+                    onClick={() => {
+                        setCurrentPage('sla')
+                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
+                    style={{ background: 'none', border: 'none', padding: 0, color: 'var(--accent-yellow)', textDecoration: 'underline', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit' }}
+                >
+                    onze SLA en Voorwaarden
+                </button>
+                {parts[1]}
+            </>
+        )
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsSubmitting(true)
@@ -173,7 +194,7 @@ function App() {
                         {section.questions.map((q) => (
                             <div key={q.id} className="form-group">
                                 <label className="question-label" htmlFor={q.id}>{q.label}</label>
-                                <span className="question-desc">{q.desc}</span>
+                                <span className="question-desc">{renderDesc(q.desc)}</span>
 
                                 {q.type === 'text' && (
                                     <input
