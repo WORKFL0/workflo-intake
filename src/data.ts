@@ -10,406 +10,366 @@ export interface Question {
 
 export interface Section {
     title: string;
+    description?: string;
     questions: Question[];
 }
 
 export const formSections: Section[] = [
     {
-        title: "1. On/Offboarding (Nieuwe & Vertrekkende Medewerkers)",
+        title: "1. On/Offboarding (Nieuwe & Vertrekkende Collega's)",
+        description: "Een goed begin (en einde) van een werkverband is cruciaal. Laten we bespreken hoe we dit soepel voor jullie gaan organiseren.",
         questions: [
             {
                 id: "q1",
-                label: "Wie geeft het aan ons door als een medewerker uit dienst gaat?",
-                desc: "Licenties blijven geld kosten zolang ze niet zijn opgezegd. De kosten hiervoor zijn voor eigen rekening als het vertrek niet tijdig wordt gemeld.",
+                label: "Wie geeft aan ons door als een gewaardeerde collega uit dienst gaat?",
+                desc: "Licenties lopen door totdat deze worden stopgezet. Om onnodige kosten te voorkomen, hebben we een vast aanspreekpunt nodig. Dit wordt ook jullie verantwoordelijkheid in het beleid.",
                 type: "text"
             },
             {
                 id: "q2",
-                label: "Wat doen we met de mailbox en bestanden (OneDrive) van een ex-medewerker?",
-                desc: "Hoelang moeten we deze bewaren en wie is de eindverantwoordelijke die hiervoor akkoord geeft?",
+                label: "Wat is jullie beleid voor het behoud van data (mailbox en OneDrive/Google Drive) na offboarding?",
+                desc: "Laten we hier een vaste 'Data Retentie Policy' voor afspreken. Wat past het beste bij jullie organisatie?",
                 type: "radio",
                 options: [
-                    "Direct verwijderen",
-                    "30 dagen bewaren en dan verwijderen",
-                    "Doorsturen naar manager en 30 dagen bewaren",
-                    "Anders (Vul hieronder in)"
+                    "Direct verwijderen (na backup check)",
+                    "30 dagen bewaren ten behoeve van overdracht, daarna verwijderen",
+                    "Data overdragen aan de manager (rechten delegeren) en 30 dagen bewaren",
+                    "Anders: we willen hier graag samen een policy over uitzetten."
                 ]
             },
             {
                 id: "q3",
                 label: "Hoe gaan we om met wachtwoorden bij vertrek? (Gedeelde accounts, alarmsysteem, Wi-Fi)",
-                desc: "Wie zorgt ervoor dat gedeelde wachtwoorden worden veranderd als iemand vertrekt en binnen hoeveel dagen moet dat gebeuren?",
-                type: "textarea"
+                desc: "Wie zorgt ervoor dat gedeelde wachtwoorden intern of extern worden aangepast zodra iemand vertrekt?",
+                type: "text"
             },
             {
                 id: "q4",
-                label: "Wie zorgt dat de hardware (bijv. de Mac) retour komt?",
-                desc: "Apparatuur moet terug. Wie is verantwoordelijk hiervoor, vooral als de medewerker thuiswerkt of ziek is?",
+                label: "Wie zorgt dat de apparatuur (bijv. de Mac) retour komt?",
+                desc: "Dit kan lastig zijn bij thuiswerkers of bij ziekte. Wie neemt hierover de regie?",
                 type: "text"
             },
             {
                 id: "q5",
-                label: "Apparaten wissen (MDM unenrollment)",
-                desc: "Een apparaat wissen is een bewuste actie. Weten jullie dat dit expliciet bij ons aangevraagd moet worden?",
+                label: "Apparaten wissen (MDM unenrollment Policy)",
+                desc: "Om bedrijfsdata te beschermen, wissen wij de laptop. Weten jullie dat we hiervoor een expliciet besluit/ticket per keer nodig hebben vanuit jullie management?",
                 type: "radio",
-                options: ["Ja, we begrijpen dit en zullen dit per ticket aanvragen."]
+                options: [
+                    "Ja, we begrijpen dit proces en werken eraan mee.",
+                    "We willen dit liever geautomatiseerd zien zodra een account wordt geblokkeerd (graag overleggen)."
+                ]
             },
             {
                 id: "q6",
-                label: "Minimale opzegtermijn voor nieuwe medewerkers",
-                desc: "Een aanmelding op vrijdagmiddag voor maandagochtend geeft problemen. Hoeveel werkdagen van tevoren melden jullie een nieuwe medewerker aan?",
+                label: "Wat wordt de Minimale Opzegtermijn voor het inregelen van nieuwe medewerkers?",
+                desc: "Onze onboarding policy: voor de beste ervaring hebben we even de tijd nodig. Dit spreken we graag van tevoren met je af.",
                 type: "radio",
-                options: ["Minimaal 5 werkdagen van tevoren", "Minimaal 10 werkdagen van tevoren"]
+                options: [
+                    "Minimaal 5 werkdagen van tevoren (standaard)",
+                    "Minimaal 10 werkdagen van tevoren",
+                    "We hebben af en toe een 'spoed' onboarding nodig, kunnen we daar afspraken over maken?"
+                ]
             },
             {
                 id: "q7",
-                label: "Hoe gaan we om met ZZP'ers, stagiaires of tijdelijke krachten?",
-                desc: "Krijgen zij tijdelijke accounts? Beperkte toegang? Aparte licentievorm?",
+                label: "Hoe gaan we om met externe krachten (ZZP'ers, stagiaires of tijdelijke krachten)?",
+                desc: "Krijgen zij standaard toegang of beperkte accounts? We willen hierin een duidelijke richtlijn vaststellen.",
                 type: "textarea"
             },
             {
                 id: "q8",
-                label: "Naamgeving: Hoe noemen we e-mailadressen en apparaten?",
-                desc: "Bijv: voornaam@bedrijf.nl of voornaam.achternaam@bedrijf.nl? Wie bepaalt dit standaard?",
+                label: "Naamgeving Policy: Hoe structureren we e-mailadressen (Microsoft 365 / Google Workspace)?",
+                desc: "Standaard is duidelijk! Bijv: voornaam@bedrijf.nl of voornaam.achternaam@bedrijf.nl? Wie mag hierin uitzonderingen goedkeuren?",
                 type: "text"
             }
         ]
     },
     {
-        title: "2. Purchasing (Aanschaf Hardware & Software)",
+        title: "2. Purchasing (Hardware & Software Inrichting)",
+        description: "Snel en veilig de juiste middelen in de handen van de medewerkers. Zo bouwen we dat op.",
         questions: [
             {
                 id: "q9",
-                label: "Apparaten die niet via Workflo zijn gekocht (ADE/Zero Touch)",
-                desc: "Als je een apparaat ergens anders koopt, kost het ons extra tijd (0,5u) om deze te koppelen. Ga je hiermee akkoord?",
+                label: "Beleid rondom Eigen Aanschaf Hardware (Niet via Workflo / Zero Touch)",
+                desc: "Apparaten die niet via ons zijn besteld, missen een directe koppeling voor automatisch beheer (Apple Business Manager). Er geldt hiervoor een opslag (0,5u) om ze handmatig te koppelen.",
                 type: "radio",
-                options: ["Ja, we zijn ons bewust van deze toeslag."]
-            },
-            {
-                id: "q10",
-                label: "Garantieafhandeling",
-                desc: "Als een apparaat niet bij ons is gekocht, is de garantie jouw probleem (bijv. zelf naar de MediaMarkt). Begrepen?",
-                type: "radio",
-                options: ["Ja, helder."]
+                options: [
+                    "Begrepen. We accepteren de extra handelingstijd als we het zelf aanschaffen.",
+                    "We besluiten om alles via Workflo te bestellen voor het gemak."
+                ]
             },
             {
                 id: "q11",
-                label: "Wanneer is een apparaat 'End-of-life' (te oud)?",
-                desc: "Na X jaar of als Apple het niet meer ondersteunt, adviseren wij vervanging. De keuze is aan jou, maar bij problemen is support buiten scope. Wat is jullie afschrijvingstermijn voor Macs?",
-                type: "text"
-            },
-            {
-                id: "q12",
-                label: "Support op tweedehands of refurbished hardware",
-                desc: "Wij geven geen oplossingsgarantie op niet door ons geleverde tweedehands apparatuur. Begrepen?",
+                label: "Wanneer is een apparaat 'End-of-life' in jullie Lifecycle Policy?",
+                desc: "Na X jaar, of als de fabrikant geen updates meer geeft, adviseren wij vervanging. Na zo'n moment kunnen we stabiliteit niet meer garanderen en valt extra support buiten de basisdienst.",
                 type: "radio",
-                options: ["Ja, ik begrijp dit risico."]
+                options: [
+                    "We schrijven af op 3 jaar",
+                    "We schrijven af op 4 jaar",
+                    "We vervangen alleen als hij echt defect is en accepteren de eventuele risico's of support-kosten daarna."
+                ]
             },
             {
                 id: "q13",
-                label: "Software buiten onze standaard stack",
-                desc: "We ondersteunen de basis. Als je zelf andere software koopt (bijv. Adobe, of een CRM tool) en ons vraagt te helpen, is dat extra (billable) werk. Akkoord?",
+                label: "Software Policy: Licenties buiten onze standaard scope",
+                desc: "We ondersteunen ons aanbevolen pakket. Gebruiken jullie teamleden veel eigen specifieke software (bijv. Adobe, specifieke tekenprogramma's)?",
                 type: "radio",
-                options: ["Ja, akkoord."]
+                options: [
+                    "Ja, we accepteren dat gerelateerde hulpvragen hierover apart worden berekend (billable).",
+                    "We willen een vast pakket aan software door jullie laten certificeren (graag overleggen over een maatwerk fee)."
+                ]
             },
             {
                 id: "q14",
-                label: "Op wiens naam staan abonnementen (zoals Microsoft 365)?",
-                desc: "Lopen deze licenties via onze NCE-reseller portal of direct via Microsoft op jullie creditcard? Let op: via ons betekent dat we beheer en support sneller kunnen leveren.",
+                label: "Platform Voorkeur (Microsoft 365 of Google Workspace)?",
+                desc: "Wij kunnen de centrale workspace beheren via één van deze systemen. Hoe zien jullie dit voor je?",
                 type: "radio",
-                options: ["Via Workflo", "Direct via de leverancier"]
+                options: [
+                    "Microsoft 365 omgeving (via Workflo licenties)",
+                    "Google Workspace omgeving (via Workflo licenties)",
+                    "We hebben zelf licenties bij de leverancier, we laten dit zo, maar begrijpen dat beheer trager kan zijn."
+                ]
             },
             {
                 id: "q15",
-                label: "Tot welk bedrag mogen wij zonder expliciete goedkeuring iets bestellen?",
-                desc: "Bijvoorbeeld een kabel of dongle, zodat je medewerker direct verder kan werken. (Bijv. tot €50 of €100). En wie moet daarboven akkoord geven?",
-                type: "text"
+                label: "Stroomlijnen van aankoopgoedkeuring: Wat wordt het vrij besteedbaar bedrag?",
+                desc: "Tot welk bedrag mogen we zonder expliciete aanvraag bestellen (bijv. een extra oplader, verloopstukje)? Zo loopt niemand vast.",
+                type: "radio",
+                options: [
+                    "Tot €50 is direct akkoord om de medewerker snel te helpen.",
+                    "Tot €100 is akkoord.",
+                    "We willen elke euro altijd zelf controleren vóór aanschaf."
+                ]
             }
         ]
     },
     {
-        title: "3. Support (Hulp & Tickets)",
+        title: "3. Service & Support (Hulp als het nodig is)",
+        description: "Een warm vangnet. Hoe en wanneer staan we voor jullie klaar?",
         questions: [
             {
                 id: "q16",
-                label: "Wat valt NIET onder de vaste prijs (fixed fee)?",
-                desc: "Persoonlijke software (Spotify), privéapparaten (telefoon van partner) of thuisprinters vallen niet onder de fee. Helder?",
+                label: "De grens tussen werk en privé (Scope van fixed fee)",
+                desc: "Support voor persoonlijke randapparaten of thuis-printers vallen veelal lokaal. Hebben jullie behoefte om dit toch af te dekken, of is de grens duidelijk?",
                 type: "radio",
-                options: ["Ja, wij begrijpen de grens tussen werk en privé."]
+                options: [
+                    "De grens is duidelijk; persoonlijke zaken vallen buiten het vaste contact.",
+                    "Wij willen wel degelijk premium home-office support inbegrepen hebben (vraag naar de opslag)."
+                ]
             },
             {
                 id: "q17",
-                label: "Prioriteiten (SLA's)",
-                desc: "Een P1 (iedereen ligt plat) is anders dan een P3 (ik wil een nieuwe muis). Hebben jullie onze SLA responstijden gelezen en begrepen?",
+                label: "Prioriteiten (SLA's) Policy",
+                desc: "Onze SLA (Service Level Agreement) dekt urgente (P1) zaken veel sneller af dan 'wensen' (P3). Zullen we de P-structuur samen doornemen voor het contract in gaat?",
                 type: "radio",
-                options: ["Ja, de SLA is gelezen en akkoord."]
+                options: [
+                    "We hebben de responstijden gelezen en zijn er mee akkoord.",
+                    "We plannen hier nog graag een aparte belafspraak over in."
+                ]
             },
             {
                 id: "q18",
-                label: "Hoe mag je support aanvragen?",
-                desc: "Alleen via het ticketsysteem of vaste portal. Geen WhatsAppjes naar privé nummers van engineers. Akkoord voor traceerbaarheid?",
+                label: "Hoe kan het team ons bereiken?",
+                desc: "Wij bundelen alles centraal via ons ticket systeem. Dat houdt het snel en traceerbaar. Geen WhatsAppjes voor de overzichtelijkheid. Zullen we dit zo als beleid aan jullie team communiceren?",
                 type: "radio",
-                options: ["Ja, wij communiceren via het officiële ticketsysteem."]
-            },
-            {
-                id: "q19",
-                label: "Wie mag support tickets aanmaken?",
-                desc: "Mag iedereen zelf een ticket inschieten, of loopt dit centraal via 1 of 2 contactpersonen?",
-                type: "radio",
-                options: ["Iedere medewerker mag tickets inschieten", "Alleen centrale contactpersonen"]
+                options: [
+                    "Ja, iedereen wordt de juiste route gewezen (Ticketsysteem/Support Portal).",
+                    "Grotendeels, we hebben behoefte aan een 'noodnummer' voor directiebellen."
+                ]
             },
             {
                 id: "q20",
-                label: "Wanneer komen we langs (On-site)?",
-                desc: "Support is standaard op afstand (remote). On-site bezoek valt buiten de vaste fee tenzij het een netwerk-uitval door ons toedoen is. Akkoord?",
+                label: "Remote vs. On-site Policy",
+                desc: "Wij lossen 95% remote op. Hebben jullie voorkeur voor een afgesproken moment waarop we wel periodiek on-site werken voor een betere band (berekend of in fee)?",
                 type: "radio",
-                options: ["Ja, bezoeken op locatie zijn op uurbasis tenzij anders afgesproken."]
+                options: [
+                    "Alleen op uurbasis als het probleem niet remote op te lossen is.",
+                    "Graag maken we een afspraak voor een vast on-site moment (1x per maand bijvoorbeeld)."
+                ]
             },
             {
                 id: "q21",
-                label: "Hulp buiten kantoortijden",
-                desc: "Werken jullie 's avonds of in het weekend en is daar dekking voor nodig? Zo ja, dit valt onder een speciaal (duurder) tarief. Is dit gewenst?",
+                label: "Ondersteuning buiten kantoortijden",
+                desc: "Werk stopt niet altijd om 17:00. Wat voor service verlangen jullie in de avonden en het weekend?",
                 type: "radio",
-                options: ["Nee, alleen kantoortijden volstaan", "Ja, we willen een voorstel voor 24/7 of avond support"]
-            },
-            {
-                id: "q22",
-                label: "Gebruikersfout vs. Technisch defect",
-                desc: "Als iemand zelf een beker koffie over de laptop gooit of zelf de map met gedeelde bestanden weggooit, valt het herstel buiten de vaste fee. Akkoord?",
-                type: "radio",
-                options: ["Ja, schade of grove fouten van de gebruiker is maatwerk/billable."]
-            },
-            {
-                id: "q23",
-                label: "Externe leveranciers (bijv. boekhoudsoftware, Exact)",
-                desc: "Als Exact stuk is, bel je Exact. Als wij mee moeten kijken of bellen met Exact, is dat buiten scope. Helder?",
-                type: "radio",
-                options: ["Ja, we bellen eerst zelf de leverancier van de specifieke software."]
+                options: [
+                    "Reguliere kantoortijden zijn meer dan voldoende.",
+                    "We hebben een bereikbaarheidsdienst nodig met vaste afspraken (24/7 of avond SLA)."
+                ]
             }
         ]
     },
     {
-        title: "4. Security & Compliance (Beveiliging & Regels)",
+        title: "4. Security & Compliance",
+        description: "Gegevens bewaken alsof ze van ons zijn. Wat spreken we met elkaar af?",
         questions: [
             {
                 id: "q24",
-                label: "Hebben jullie een Acceptable Use Policy (gedragsregels voor IT)?",
-                desc: "Een document waarin staat wat medewerkers wel/niet mogen doen op zakelijke laptops. Hebben jullie dit?",
+                label: "Acceptable Use Policy (Gedragsregels)",
+                desc: "Hebben jullie een set aan regels (AUP) waarin medewerkers is uitgelegd wat er mag op de bedrijfslaptops?",
                 type: "radio",
-                options: ["Ja", "Nee, we willen hier advies over", "Nee, hebben we niet nodig"]
+                options: [
+                    "Ja, die hebben we al in ons werknemershandboek.",
+                    "Nee, maar we zouden graag willen dat jullie ons helpen die op te stellen.",
+                    "Zien we voor nu als niet essentieel."
+                ]
             },
             {
                 id: "q25",
-                label: "MFA (Authenticatie in twee stappen) is verplicht",
-                desc: "MFA is een harde eis voor alle accounts. Bij uitzonderingen vervalt alle aansprakelijkheid vanuit ons. Gaan jullie hiermee akkoord?",
+                label: "Authenticatie in twee stappen (MFA) Policy",
+                desc: "Samen veilig. MFA is bij ons verplicht. Bij expliciete (schriftelijke) weigering, ligt het volledige risico lokaal bij de directie. We hopen op jullie steun hierin.",
                 type: "radio",
-                options: ["Ja, we begrijpen het belang van MFA en dwingen dit af."]
-            },
-            {
-                id: "q26",
-                label: "Twijfel over een e-mail (Phishing)",
-                desc: "Wie belt/mailt de medewerker bij een verdachte mail? Mogen zij dit direct aan ons doorsturen als P2 ticket?",
-                type: "text"
-            },
-            {
-                id: "q27",
-                label: "Wat doen we bij een grote hack of ransomware?",
-                desc: "Wie beslist intern of we het hele bedrijf offline (internet eruit) mogen trekken om verdere schade te voorkomen?",
-                type: "text"
+                options: [
+                    "100% mee eens, MFA voor iedereen ongeacht wrijving."
+                ]
             },
             {
                 id: "q28",
-                label: "Zijn de AVG/GDPR documenten (Verwerkersovereenkomst) getekend?",
-                desc: "Voordat wij beheer doen, moeten we wettelijk een handtekening hebben op de verwerkersovereenkomst.",
-                type: "radio",
-                options: ["Ja, of we tekenen deze direct bij de start."]
+                label: "Privacy & AVG/GDPR: Wie tekent de verwerkersovereenkomst?",
+                desc: "We sluiten een verwerkersovereenkomst. Wie van de directie is hiertoe bevoegd?",
+                type: "text"
             },
             {
                 id: "q29",
-                label: "Valt jullie bedrijf onder de nieuwe NIS2 wetgeving?",
-                desc: "Dit is wetgeving voor belangrijke sectoren. Is dat op jullie van toepassing?",
+                label: "Valt jullie bedrijf of sector onder de NIS2 wetgeving?",
+                desc: "Afhankelijk van risico en omzet, moeten we wellicht veel stevigere maatregelen treffen en documentatie aanhouden.",
                 type: "radio",
-                options: ["Ja", "Nee", "Weet ik niet (Zoek dit alsjeblieft uit)"]
-            },
-            {
-                id: "q30",
-                label: "Encryptie van apparaten (FileVault/BitLocker)",
-                desc: "Alle schijven worden versleuteld. Het verlies van een apparaat zónder deze beveiliging is een enorm risico. Wij slaan de herstelsleutels op.",
-                type: "radio",
-                options: ["Gelezen en akkoord"]
+                options: [
+                    "Ja, ons is verteld dat dit voor ons in werking (is) gaat.",
+                    "Nee",
+                    "Hier hebben we nog niet naar gekeken, graag in gesprek hierover."
+                ]
             },
             {
                 id: "q31",
-                label: "Mogen apparaten privé gebruikt worden?",
-                desc: "Als een laptop zoekraakt, wissen wij deze vaak volledig. Staan er dan privéfoto's op, dan zijn we die kwijt. Is privégebruik toegestaan?",
+                label: "Mag een medewerker op zijn zakelijke device privé-dingen doen?",
+                desc: "De 'BYOD' of de 'Privé op werk-laptop' policy. Als een systeem gestolen wordt (of om een andere reden gewist wordt), gaan ook eventueel opgeslagen privéfoto's verloren.",
                 type: "radio",
-                options: ["Ja", "Nee"]
-            },
-            {
-                id: "q32",
-                label: "Verlies of diefstal van een laptop of telefoon",
-                desc: "Wie meldt dit bij ons (en de politie) en binnen hoeveel uur? Wij plegen direct een remote wipe na uw melding.",
-                type: "text"
-            },
-            {
-                id: "q33",
-                label: "Bring Your Own Device (Eigen apparaten op het werk)",
-                desc: "Mogen medewerkers hun privételefoon gebruiken voor de werkmail? Zo ja, wij eisen dat we bedrijfsdata op die telefoon kunnen wissen bij vertrek. Akkoord?",
-                type: "radio",
-                options: ["Ja, we stemmen dit af met het team", "Nee, privé apparaten worden niet zakelijk gebruikt"]
+                options: [
+                    "Dit staan we oogluikend toe, verlies van data is risico werknemer.",
+                    "We willen een strikte lockdown. Alleen zakelijke data mag erop (streng policy management nodig)."
+                ]
             }
         ]
     },
     {
-        title: "5. Backup & Continuïteit (Een Vangnet)",
+        title: "5. Backup, Nood-procedures & Continuïteit",
+        description: "Een goed vangnet is onzichtbaar tot je het echt, maar dan ook echt nodig hebt.",
         questions: [
             {
                 id: "q34",
-                label: "Wat wordt er wél en níet geback-upt?",
-                desc: "We maken een backup van Microsoft 365, maar NIET van bestanden die iemand los op het bureaublad plaatst (buiten OneDrive). Wat is daarover afgesproken?",
+                label: "Wat in de cloud staat, is veilig. Wat niet, dat niet. Gedeelde Backup Policy",
+                desc: "Wij zorgen primair voor de omgeving (Microsoft/Google). Lokale bureaublad bestanden (die niet syncen met de cloud) zijn veelal kwetsbaar. Hoe willen we deze richtlijn communiceren?",
                 type: "radio",
-                options: ["Helder, medewerkers moeten op de juiste schijf werken."]
+                options: [
+                    "We accepteren dit en sturen medewerkers structureel op het werken in de cloud-folders.",
+                    "We willen een device-wide backup beleid overwegen en daar met jullie voor in gesprek."
+                ]
             },
             {
                 id: "q35",
-                label: "Hoelang mag bij een grote ramp alles plat liggen? (RTO)",
-                desc: "1 uur? 1 dag? 1 week? Een sneller herstel vereist een duurdere oplossing.",
+                label: "Recovery Time Objective (RTO) - Bij een groot incident",
+                desc: "Bij brand of hack, binnen welke termijn (RTO) moét het bedrijf of de kritische onderdelen weer online zijn? We optimaliseren onze dienst richting die verwachting.",
                 type: "text"
-            },
-            {
-                id: "q36",
-                label: "Testen van de backup",
-                desc: "Een backup die nooit is getest, is geen backup. We zullen dit periodiek testen (en rapporteren). Akkoord?",
-                type: "radio",
-                options: ["Ja, test maar."]
             },
             {
                 id: "q37",
-                label: "Aparte Microsoft 365 / Google Workspace Backup",
-                desc: "Verwijderde e-mails in M365 ben je standaard na 30 dagen kwijt. Wij verplichten een externe backup oplossing om dataverlies per ongeluk of met opzet te voorkomen. Mee eens?",
+                label: "Cloud Backup (Microsoft 365 / Google Workspace)",
+                desc: "Standaard is er geen echte backup vanuit de leverancier (enkel 30-dagen prullenbak). Om zekerheid te hebben richten wij altijd een externe cloud-side backup in. Kunnen we rekenen op deze gezamenlijke visie?",
                 type: "radio",
-                options: ["Ja, we nemen een licentie af voor de externe M365 backup."]
-            },
-            {
-                id: "q38",
-                label: "Hebben jullie nog een lokale server of NAS op kantoor staan?",
-                desc: "Staat er ergens een kastje te zoemen en is overeengekomen of wij dit kastje ook in beheer nemen (firmware updaten, monitoren)?",
-                type: "radio",
-                options: ["Ja, we hebben dit, we willen dit in beheer.", "Ja, we hebben dit, we beheren dit zelf.", "Nee, we werken 100% in de cloud."]
+                options: [
+                    "Ja. Cloud Backup is vitaal en we nemen dit standaard bij jullie af.",
+                    "We willen het risico bewust nemen om dit niet af te nemen (met vrijwaring)."
+                ]
             }
         ]
     },
     {
-        title: "6. Netwerk & Infrastructuur (Wi-Fi en Internet)",
+        title: "6. Netwerk & Internet Verblijf op kantoor",
+        description: "Snel, naadloos en veilig in de meeting rooms.",
         questions: [
             {
                 id: "q39",
-                label: "Beheren wij het netwerk/de Wi-Fi? (Bijv. Ubiquiti UniFi)",
-                desc: "Hebben wij dit ingericht en is het updaten hiervan onderdeel van ons contract?",
+                label: "Beheren we straks (op termijn) ook het interne kantoor netwerk? (bijv. Ubiquiti UniFi)",
+                desc: "Zullen we het netwerk en beveiliging van de access points in ons beheer opnemen?",
                 type: "radio",
-                options: ["Ja, dit valt binnen jullie contract.", "Nee, we hebben een andere partij of doen dit zelf."]
-            },
-            {
-                id: "q40",
-                label: "Netwerktoegang voor externe partijen",
-                desc: "Als het alarmsysteem of het kassasysteem internet nodig heeft, wie vertelt ons dat ze op een apart (veilig) netwerk moeten?",
-                type: "text"
-            },
-            {
-                id: "q41",
-                label: "Is er een gasten-Wi-Fi nodig?",
-                desc: "Gasten mogen nooit zomaar op het bedrijfsnetwerk. Wat wordt het wachtwoord van het gastennetwerk?",
-                type: "text"
+                options: [
+                    "Ja, heel graag alles onder één warm dak.",
+                    "Nee, we regelen dit zelf of met de huisbaas.",
+                    "Nee, maar we zouden wel graag een netwerk-inspectie willen boeken."
+                ]
             },
             {
                 id: "q42",
-                label: "Werken op afstand en VPN",
-                desc: "Werken mensen vanaf onveilige netwerken (koffiezaakjes, hotels)? Moeten we instellen dat zij altijd een VPN moeten gebruiken naar bedrijfsdata?",
+                label: "Thuiswerken & Openbare netwerken (VPN of Zero-Trust Focus)",
+                desc: "Hoe willen jullie de veiligheid van medewerkers controleren die veel vanuit koffiezaakjes of de bank thuis werken?",
                 type: "radio",
-                options: ["Ja, verplicht VPN op openbare netwerken", "Nee, niet strikt noodzakelijk (cloud apps zijn al beveiligd)"]
+                options: [
+                    "Strikte VPN-plicht bij gebruik van een ander netwerk dan kantoor.",
+                    "Geen VPN plicht. We beveiligen alleen de cloud applicaties d.m.v. zero trust (cloud focus)."
+                ]
             },
             {
                 id: "q43",
-                label: "Wie is de contactpersoon als het internet van Ziggo/KPN uitvalt?",
-                desc: "Als het internet op kantoor uitvalt, ligt dat aan de provider. Wil je dat wij hen bellen (en dat we hiervoor mogelijk uren rekenen)?",
+                label: "Internet via Ziggo/KPN val uit, escaleren we?",
+                desc: "Storing bij de provider ligt buiten ons beheer. Mogen we de telefoontjes / onderzoek hierin overnemen (op uurbasis)?",
                 type: "radio",
-                options: ["Ja, bel de provider namens ons (uurtarief akkoord).", "Nee, wij bellen KPN/Ziggo zelf eerst."]
-            },
-            {
-                id: "q44",
-                label: "Netwerkdocumentatie",
-                desc: "Wij schrijven op hoe alles is aangesloten. Als de schoonmaker kabels lostrekt en overal weer in steekt, kost het tijd om het weer in orde te maken. Akkoord?",
-                type: "radio",
-                options: ["Ja, wij blijven van de kabels in de patchkast af."]
+                options: [
+                    "Ja graag, en we betalen jullie met alle liefde de uren voor die ontzorging.",
+                    "Nee, dit handelt de directie/IT-hero wel intern met KPN of Ziggo af."
+                ]
             }
         ]
     },
     {
-        title: "7. Communicatie & Escalatie (Wanneer het misgaat of spannend wordt)",
+        title: "7. Communicatie, Vertrouwen & Escalatie",
+        description: "Goede relaties behouden communicatie, óók in crisistijd.",
         questions: [
             {
                 id: "q45",
-                label: "Wie is onze Vaste IT-Contactpersoon bij jullie?",
-                desc: "Met wie overleggen we, wie mag beslissen? Zonder interne 'IT-hero' loopt alles mis.",
-                type: "text"
-            },
-            {
-                id: "q46",
-                label: "Wie mag financieel akkoord geven?",
-                desc: "Als we een offerte of voorstel sturen of een licentie uitbreiden, wie heeft de bevoegdheid om 'ja' te zeggen?",
-                type: "text"
-            },
-            {
-                id: "q47",
-                label: "Hoe informeren we jullie bij gepland onderhoud (downtime)?",
-                desc: "Sommige updates zorgen voor 15min uitval van bijv. Wi-Fi. Hoeveel dagen van tevoren moeten we dat doorgeven?",
+                label: "Wie wordt jullie Vaste Interne IT-Contactpersoon (De IT-hero)?",
+                desc: "Als we snel even moeten overleggen of goedkeuring nodig hebben. Deze persoon is goud waard voor onze samenwerking.",
                 type: "text"
             },
             {
                 id: "q48",
-                label: "Vast klachtenproces",
-                desc: "Als een medewerker ontevreden is over ons, bij wie kan diegene terecht en hoe geven we dit door (zodat het niet opgekropt wordt)?",
+                label: "Klachtenproces",
+                desc: "Aarzel nooit. Bij wie kan een medewerker terecht als het een keer minder loopt, en hoe weten wij dit zodat we direct kunnen corrigeren?",
                 type: "textarea"
             },
             {
                 id: "q49",
-                label: "Zullen we elk kwartaal een uurtje afspreken?",
-                desc: "Niet om iets te verkopen, maar om te kijken naar de tickets, frustraties en de toekomst (Service Review/Kwartaalgesprek)?",
+                label: "Samen evalueren in het kwartaalgesprek",
+                desc: "Wij bouwen graag langetermijn relaties. Geven jullie ons per kwartaal een evaluatiemoment (Service Review) om ticket-volumes te checken en toekomstplannen te smeden?",
                 type: "radio",
-                options: ["Ja, heel graag.", "Nee, 1 keer per jaar of halfjaar is genoeg."]
+                options: [
+                    "Absoluut. We horen graag hoe jullie en wij presteren.",
+                    "We plannen liever per half-jaar, tenzij er eerdere issues zijn."
+                ]
             }
         ]
     },
     {
-        title: "8. Contractueel & Financieel",
+        title: "8. Contractueel & Fair Use",
+        description: "Open afspraken. Duidelijke grenzen.",
         questions: [
             {
-                id: "q50",
-                label: "Aanpassen van de factuur bij groei/krimp",
-                desc: "Als jullie mensen aannemen of ontslaan, passen we de maandelijkse fee daar op aan. Dit gebeurt op een standaard peildatum per maand, akkoord?",
-                type: "radio",
-                options: ["Ja, dit is duidelijk."]
-            },
-            {
                 id: "q51",
-                label: "Wat bedoelen we met 'Fair Use' op support?",
-                desc: "Een vaste fee dekt veel, maar niet alles. Als 1 werknemer 20 tickets per maand instuurt omdat hij niet kan omgaan met Word, overleggen we dit en brengen we uren in rekening. Akkoord?",
+                label: "De grens van All-in (Fair Use Policy)",
+                desc: "Onze vaste fee is op vertrouwen gebaseerd. Mocht een collega stelselmatig excessief ondersteuning vragen op basale applicatie-(how to) niveau, dan plannen we een gesprek over wellicht wat betaalde training. Gaan we hier op dezelfde manier mee om?",
                 type: "radio",
-                options: ["Ja, overleg in zo'n geval over betaalde training of uurtarief."]
+                options: [
+                    "Ja, we hanteren redelijkheid en waarderen meedenken bij zware belasting."
+                ]
             },
             {
                 id: "q52",
                 label: "Aansprakelijkheid",
-                desc: "Als wij adviseren om de firewall te updaten en jullie weigeren vanwege de kosten, en je wordt daarna gehackt, dan zijn wij NIET aansprakelijk. Akkoord?",
+                desc: "Als wij in advies (of een P3 ticket) urgentie aandragen omtrent veiligheid, en jullie besluiten budgettair af te wijken, dan valt aansprakelijkheid van gerelateerde calamiteiten buiten Workflo. Spreken we dit zo af?",
                 type: "radio",
-                options: ["Ja, we zijn samen in controle maar beslissen zelf."]
-            },
-            {
-                id: "q53",
-                label: "Lijst met ondersteunde software",
-                desc: "Als jullie overgaan op een nieuw HR-pakket en wij moeten dit beheren, dan moeten we hierover in overleg en de fee of voorwaarden aanpassen. Akkoord?",
-                type: "radio",
-                options: ["Ja, we informeren jullie altijd vóórdat we nieuwe bedrijfssoftware introduceren."]
+                options: [
+                    "Volledig begrepen en logisch."
+                ]
             }
         ]
     }
