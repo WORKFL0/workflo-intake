@@ -89,7 +89,26 @@ const SlaPage: React.FC<SlaPageProps> = ({ onNavigateHome }) => {
             </div>
 
             <div className="section-card">
-                <h2 className="section-title">3. Wat we van jullie mogen verwachten</h2>
+                <h2 className="section-title">3. Nieuwe Collega's & Hardware (Zero-Touch)</h2>
+                <p className="section-desc">Snelle levering en een magische eerste werkdag.</p>
+
+                <div className="form-group" style={{ marginBottom: '25px' }}>
+                    <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>Het Onboarding Proces</label>
+                    <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
+                        Wij ontvangen de onboarding request graag <strong>minimaal 5 werkdagen</strong> van tevoren in ons ticketsysteem. Dit geeft ons de tijd om accounts aan te maken, rechten te knopen en hardware gereed te maken. Minder dan 5 dagen? Dan kunnen we niet garanderen dat het op tijd perfect staat, of we moeten een spoed-opslag berekenen.
+                    </p>
+                </div>
+
+                <div className="form-group">
+                    <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>Zero-Touch Hardware</label>
+                    <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
+                        Apparatuur die via Workflo besteld wordt, sturen we op de achtergrond ("Zero-Touch" via Apple Business Manager of Windows Autopilot) naar de nieuwe collega. Zodra zij de doos openen, configureert de laptop zichzelf. Bestellen jullie toch zelf hardware bij de MediaMarkt of online? Geen probleem, maar dan zijn wij <strong>meer uren</strong> (ongeveer 0,5u per device) kwijt aan handmatige acties (billable). Ook zijn garantie-afhandelingen dan aan jullie.
+                    </p>
+                </div>
+            </div>
+
+            <div className="section-card">
+                <h2 className="section-title">4. Wat we van jullie mogen verwachten</h2>
                 <p className="section-desc">Wij fixen de IT, jullie blijven in de lead van het bedrijf. Wat vragen we van jullie?</p>
 
                 <div className="form-group">
@@ -103,7 +122,14 @@ const SlaPage: React.FC<SlaPageProps> = ({ onNavigateHome }) => {
                 <div className="form-group" style={{ marginTop: '25px' }}>
                     <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>Tijdig Doorgeven (Anders betaal je voor lucht)</label>
                     <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
-                        Gaat er iemand uit dienst? Laat het tijdig weten (minstens 5 werkdagen)! Licenties voor software stoppen niet automatisch zodra iemand zijn laatste werkdag heeft gehad. Geven jullie dit niet (uit jezelf) door, dan betalen jullie onnodig licentiekosten en valt de verantwoordelijkheid hiervoor lokaal. Geef wijzigingen dus door via het ticket systeem!
+                        Gaat er iemand uit dienst? Laat het tijdig weten! Licenties voor software stoppen niet automatisch zodra iemand zijn laatste werkdag heeft gehad. Geven jullie dit niet (uit jezelf) door, dan betalen jullie onnodig licentiekosten en valt de verantwoordelijkheid hiervoor lokaal. Geef wijzigingen dus door via het ticket systeem!
+                    </p>
+                </div>
+
+                <div className="form-group" style={{ marginTop: '25px' }}>
+                    <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>Veiligheid eerst: Backup & MFA</label>
+                    <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
+                        Wij eisen het gebruik van MFA (inloggen met telefoon goedkeuring) voor een veilig IT-landschap. Wij bieden de mogelijkheid tot Cloud Backup (die tot ver in het verleden reikt om Ransomware aan te vechten). Zien jullie, eventueel om kosten te besparen, af van deze fundamentele basisbescherming, dan accepteert de directie expliciet het risico (en de hoge kosten voor herstel).
                     </p>
                 </div>
             </div>

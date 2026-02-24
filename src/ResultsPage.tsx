@@ -58,6 +58,31 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
         return { score: finalScore, goodPoints: good, attentionPoints: attention };
     }, [formData]);
 
+    const handleDownload = () => {
+        let text = `Workflo Intake Formulier Resultaten\nKlant: ${clientName}\nScore: ${score}/100\n\n=== Antwoorden ===\n`;
+        Object.entries(formData).forEach(([key, value]) => {
+            text += `Vraag (${key}):\n${Array.isArray(value) ? value.join(', ') : value}\n\n`;
+        });
+
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Workflo_Intake_${clientName.replace(/\s+/g, '_')}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const handleEmail = () => {
+        let body = `Beste,\n\nHierbij de ingevulde Workflo Intake van ${clientName}.\nVerwachte IT Alignment Score: ${score}/100\n\n`;
+        Object.entries(formData).forEach(([key, value]) => {
+            body += `-> ${key}: ${Array.isArray(value) ? value.join(', ') : value}\n`;
+        });
+        window.location.href = `mailto:support@workflo.nl?subject=Intake Formulier: ${clientName}&body=${encodeURIComponent(body)}`;
+    };
+
     const getScoreColor = (s: number) => {
         if (s >= 80) return '#10b981'; // Green
         if (s >= 60) return '#f59e0b'; // Yellow/Orange
@@ -118,15 +143,32 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
             </div>
 
             <div className="section-card">
-                <h2 className="section-title">Wat is de volgende stap?</h2>
+                <h2 className="section-title">Hoe verwerken we dit in het systeem?</h2>
                 <p className="section-desc">
                     We gebruiken deze inzichten om de basis in te richten. Mochten er rode vlaggen in de aandachtspunten staan,
-                    dan plannen wij (Workflo) nog een kort gesprek in om te zorgen dat de risico's daadwerkelijk door de directie lokaal worden geaccepteerd
-                    of dat we hier toch nog beleid op zetten.
+                    dan plannen wij nog een kort gesprek in. Omdat dit formulier nu geen actieve verbinding heeft, verzoeken wij jullie deze resultaten direct door te sturen of op te slaan:
                 </p>
-                <div style={{ textAlign: 'center', marginTop: '30px' }}>
-                    <button className="submit-btn" onClick={onReset}>
-                        Gereed en Sluiten
+
+                <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>
+                    <button
+                        className="submit-btn"
+                        onClick={handleDownload}
+                        style={{ background: 'transparent', border: '2px solid var(--accent-yellow)', color: 'var(--accent-yellow)', minWidth: 'auto', padding: '12px 24px', fontSize: '1rem' }}
+                    >
+                        📄 Sla op als .TXT
+                    </button>
+                    <button
+                        className="submit-btn"
+                        onClick={handleEmail}
+                        style={{ background: '#3b82f6', color: '#fff', border: 'none', minWidth: 'auto', padding: '12px 24px', fontSize: '1rem', boxShadow: '0 4px 14px 0 rgba(59, 130, 246, 0.39)' }}
+                    >
+                        ✉️ Mail naar Workflo
+                    </button>
+                </div>
+
+                <div style={{ textAlign: 'center', marginTop: '40px', paddingTop: '20px', borderTop: '1px solid var(--border-color)' }}>
+                    <button className="submit-btn" onClick={onReset} style={{ minWidth: 'auto' }}>
+                        Gereed en Nieuw formulier
                     </button>
                 </div>
             </div>
