@@ -221,6 +221,17 @@ export const formSections: Section[] = [
         description: "Gegevens bewaken alsof ze van ons zijn. Wat spreken we met elkaar af?",
         questions: [
             {
+                id: "q_admin1",
+                label: "Lokale Administrator Rechten (Mogen gebruikers zelf installeren?)",
+                desc: "Als gebruikers Local Admin zijn, kunnen ze naar wens software installeren. Echter kunnen zij zo (onbewust) malware binnenhalen of hun OS om zeep helpen. Herstelwerkzaamheden door dit soort lokale wijzigingen vallen niet binnen de vaste (fixed) fee. Waar gaat jullie voorkeur naar uit?",
+                type: "radio",
+                options: [
+                    "Geen Local Admin voor gebruikers. (Workflo beheert applicaties veilig op afstand).",
+                    "We verlenen Local Admin rechten en accepteren dat bijkomende herstel-uren daaruit apart berekend worden.",
+                    "We maken een kleine selectie van 'power-users' die deze rechten in overleg wél mogen (risico lokaal)."
+                ]
+            },
+            {
                 id: "q24",
                 label: "Acceptable Use Policy (Gedragsregels)",
                 desc: "Hebben jullie een set aan regels (AUP) waarin medewerkers is uitgelegd wat er mag op de bedrijfslaptops?",
