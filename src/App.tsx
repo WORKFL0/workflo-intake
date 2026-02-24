@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { formSections } from './data'
 import { supabase } from './supabaseClient'
 import SlaPage from './SlaPage'
+import ResultsPage from './ResultsPage'
 
 function App() {
     const [currentPage, setCurrentPage] = useState<'form' | 'sla'>('form')
@@ -105,14 +106,11 @@ function App() {
 
     if (isSuccess) {
         return (
-            <div className="container success-container">
-                <div className="success-message section-card">
-                    <h2>Bedankt voor de samenwerking, {clientData.name}!</h2>
-                    <p>We hebben de ingevulde policies en antwoorden veilig opgeslagen in ons systeem.</p>
-                    <p>We zullen dit document gebruiken als leidraad en fundering voor onze support. Welkom bij Workflo!</p>
-                    <button className="submit-btn" onClick={() => window.location.reload()}>Nieuw formulier invullen</button>
-                </div>
-            </div>
+            <ResultsPage
+                clientName={clientData.name}
+                formData={formData}
+                onReset={() => window.location.reload()}
+            />
         )
     }
 
