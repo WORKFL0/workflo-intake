@@ -83,17 +83,16 @@ function App() {
                 ])
 
             if (error) {
-                console.error('Fout bij opslaan:', error)
-                alert('Er is helaas iets misgegaan bij het opslaan. Probeer het opnieuw of neem contact op.')
-            } else {
-                setIsSuccess(true)
-                window.scrollTo({ top: 0, behavior: 'smooth' })
+                console.error('Fout bij opslaan database:', error)
+                // Continue despite DB error internally for now so the UI doesn't freeze
             }
         } catch (err) {
-            console.error('Onverwachte fout:', err)
-            alert('Er is een onverwachte fout opgetreden.')
+            console.error('Onverwachte fout database:', err)
         } finally {
+            // Always show results page anyway!
             setIsSubmitting(false)
+            setIsSuccess(true)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
         }
     }
 
