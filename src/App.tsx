@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { formSections } from './data'
 import { supabase } from './supabaseClient'
+import SlaPage from './SlaPage'
 
 function App() {
+    const [currentPage, setCurrentPage] = useState<'form' | 'sla'>('form')
     const [clientData, setClientData] = useState({
         name: '',
         address: '',
@@ -73,6 +75,13 @@ function App() {
         }
     }
 
+    if (currentPage === 'sla') {
+        return <SlaPage onNavigateHome={() => {
+            setCurrentPage('form')
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        }} />
+    }
+
     if (isSuccess) {
         return (
             <div className="container success-container">
@@ -91,7 +100,19 @@ function App() {
             <div className="header">
                 <h1>Workflo IT Intake & Policy Agreement</h1>
                 <p>Samen maken we warme, heldere afspraken, zodat IT soepel voor jullie werkt zonder verrassingen.</p>
-                <p className="header-subtitle">Vul dit document samen in om onze samenwerking de best mogelijke start te geven.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center', marginTop: '15px' }}>
+                    <p className="header-subtitle">Vul dit document samen in om onze samenwerking de best mogelijke start te geven.</p>
+                    <button
+                        type="button"
+                        onClick={() => {
+                            setCurrentPage('sla')
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                        }}
+                        style={{ background: 'transparent', border: '1px solid var(--accent-yellow)', color: 'var(--accent-yellow)', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.9rem', transition: 'all 0.2s' }}
+                    >
+                        Lees onze SLA & Fixed Fee Voorwaarden
+                    </button>
+                </div>
             </div>
 
             <form onSubmit={handleSubmit}>
