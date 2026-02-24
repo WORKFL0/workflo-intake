@@ -8,7 +8,7 @@ function App() {
         address: '',
         city: ''
     })
-    const [formData, setFormData] = useState<Record<string, string>>({})
+    const [formData, setFormData] = useState<Record<string, any>>({})
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
 
@@ -24,6 +24,22 @@ function App() {
             ...prev,
             [id]: value
         }))
+    }
+
+    const handleCheckboxChange = (id: string, value: string, checked: boolean) => {
+        setFormData(prev => {
+            const arr = Array.isArray(prev[id]) ? [...prev[id]] : []
+            if (checked) {
+                if (!arr.includes(value)) arr.push(value)
+            } else {
+                const index = arr.indexOf(value)
+                if (index > -1) arr.splice(index, 1)
+            }
+            return {
+                ...prev,
+                [id]: arr
+            }
+        })
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -173,6 +189,26 @@ function App() {
                                                 {opt}
                                             </label>
                                         ))}
+                                    </div>
+                                )}
+
+                                {(q.type === 'checkbox' && q.options) && (
+                                    <div className="checkbox-group">
+                                        {q.options.map((opt, optIdx) => {
+                                            const checked = Array.isArray(formData[q.id]) && formData[q.id].includes(opt)
+                                            return (
+                                                <label key={optIdx} className="checkbox-label">
+                                                    <input
+                                                        type="checkbox"
+                                                        name={q.id}
+                                                        value={opt}
+                                                        checked={checked}
+                                                        onChange={(e) => handleCheckboxChange(q.id, opt, e.target.checked)}
+                                                    />
+                                                    {opt}
+                                                </label>
+                                            )
+                                        })}
                                     </div>
                                 )}
                             </div>

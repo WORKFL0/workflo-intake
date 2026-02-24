@@ -20,6 +20,23 @@ export const formSections: Section[] = [
         description: "Een goed begin (en einde) van een werkverband is cruciaal. Laten we bespreken hoe we dit soepel voor jullie gaan organiseren.",
         questions: [
             {
+                id: "q_onb1",
+                label: "Standaard Gegevens Aanlevering (Onboarding)",
+                desc: "Kruis de velden aan die wij standaard van jullie verwachten bij het aanmelden van een nieuwe medewerker. Zonder deze velden kunnen wij het account niet optimaal voorbereiden:",
+                type: "checkbox",
+                options: [
+                    "Volledige naam (Zoals gebruikt in HR en communicatie)",
+                    "Telefoonnummer (Cruciaal voor support en instellen van MFA)",
+                    "Gewenste zakelijke email (bijv. voornaam.achternaam@bedrijf.nl)",
+                    "Privé e-mail (Optioneel, maar o zo handig voor initiële instructies en wachtwoordherstel)",
+                    "Startdatum (en verwachte uitdiensttreding indien bekend)",
+                    "Rol informatie (Functie / Afdeling / Directe Manager)",
+                    "Rechten (Toegang tot welke specifieke mappen, bestanden of applicaties)",
+                    "Distributielijsten (Aan welke e-mailgroepen, zoals info@ of sales@, moet de collega worden toegevoegd?)",
+                    "Contractvorm (Payroll, Werkzaam via Freelance, of Stagiair)"
+                ]
+            },
+            {
                 id: "q1",
                 label: "Wie geeft aan ons door als een gewaardeerde collega uit dienst gaat?",
                 desc: "Licenties lopen door totdat deze worden stopgezet. Om onnodige kosten te voorkomen, hebben we een vast aanspreekpunt nodig. Dit wordt ook jullie verantwoordelijkheid in het beleid.",
