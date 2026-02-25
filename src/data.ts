@@ -281,33 +281,34 @@ export const formSections: Section[] = [
         ]
     },
     {
-        title: "5. Backup, Nood-procedures & Continuïteit",
+        title: "5. Data Opslag, Backup & Continuïteit",
         description: "Een goed vangnet is onzichtbaar tot je het echt, maar dan ook echt nodig hebt.",
         questions: [
             {
                 id: "q34",
-                label: "Wat in de cloud staat, is veilig. Wat niet, dat niet. Gedeelde Backup Policy",
-                desc: "Wij zorgen primair voor de omgeving (Microsoft/Google). Lokale bureaublad bestanden (die niet syncen met de cloud) zijn veelal kwetsbaar. Hoe willen we deze richtlijn communiceren?",
+                label: "Waar staat jullie data opgeslagen? (Cloud vs. Lokale Server/NAS)",
+                desc: "Om de juiste backup-strategie te bepalen, moeten we weten of jullie uitsluitend in de cloud werken (bijv. Microsoft 365, Google Workspace) of dat jullie afhankelijk zijn van een fysieke server/NAS.",
                 type: "radio",
                 options: [
-                    "We accepteren dit en sturen medewerkers structureel op het werken in de cloud-folders.",
-                    "We willen een device-wide backup beleid overwegen en daar met jullie voor in gesprek."
+                    "Volledig of overwegend Cloud (Microsoft/Google Workspace).",
+                    "Wij maken gebruik van een fysieke lokale server of NAS (Network Attached Storage).",
+                    "Hybride: we gebruiken de Cloud én een fysieke server of NAS."
                 ]
             },
             {
                 id: "q35",
                 label: "Recovery Time Objective (RTO) - Bij een groot incident",
-                desc: "Bij brand of hack, binnen welke termijn (RTO) moét het bedrijf of de kritische onderdelen weer online zijn? We optimaliseren onze dienst richting die verwachting.",
+                desc: "Bij brand, hack of ernstige hardwarestoring: binnen welke termijn moét het bedrijf of de kritische data weer online zijn? We optimaliseren onze dienstverlening richting die verwachting.",
                 type: "text"
             },
             {
                 id: "q37",
-                label: "Cloud Backup (Microsoft 365 / Google Workspace)",
-                desc: "Standaard is er geen echte backup vanuit de leverancier (enkel 30-dagen prullenbak). Om zekerheid te hebben richten wij altijd een externe cloud-side backup in. Kunnen we rekenen op deze gezamenlijke visie?",
+                label: "Actieve Data Backup Policy",
+                desc: "Clouddiensten bieden standaard geen backup, enkel een 30-dagen prullenbak. Ook NAS systemen lopen risico op ransomware zonder externe back-up. Om dataverlies te garanderen richten wij altijd een externe, off-site backup in.",
                 type: "radio",
                 options: [
-                    "Ja. Cloud Backup is vitaal en we nemen dit standaard bij jullie af.",
-                    "We willen het risico bewust nemen om dit niet af te nemen (met vrijwaring)."
+                    "Ja. Actieve, externe backup van onze data is vitaal en we nemen dit standaard bij jullie af.",
+                    "We besluiten het risico te nemen en geen externe backup te gebruiken (uitdrukkelijke vrijwaring Workflo)."
                 ]
             }
         ]
@@ -329,12 +330,13 @@ export const formSections: Section[] = [
             },
             {
                 id: "q42",
-                label: "Thuiswerken & Openbare netwerken (VPN of Zero-Trust Focus)",
-                desc: "Hoe willen jullie de veiligheid van medewerkers controleren die veel vanuit koffiezaakjes of de bank thuis werken?",
+                label: "Veilig Thuiswerken & Toegang tot bestanden (VPN vs. ZTNA/Smart Storage)",
+                desc: "Traditionele VPN's over openbare netwerken via de IT-infrastructuur zijn vaak omslachtig. Werken jullie met moderne veilige oplossingen (zoals Egnyte, LycidLink) of Zero-Trust Network Access (ZTNA via bijv. Sophos) die VPN overbodig maken, beter presteren, en sterke governance bieden?",
                 type: "radio",
                 options: [
-                    "Strikte VPN-plicht bij gebruik van een ander netwerk dan kantoor.",
-                    "Geen VPN plicht. We beveiligen alleen de cloud applicaties d.m.v. zero trust (cloud focus)."
+                    "Ja, wij gebruiken slimme moderne oplossingen (zoals Egnyte, LycidLink of ZTNA) voor naadloze remote toegang.",
+                    "Nee, we gebruiken nog een traditionele VPN en willen we dat medewerkers deze standaard aanzetten.",
+                    "Geen VPN plicht en geen ZTNA. We beveiligen cloud-applicaties puur via de browser/zero-trust."
                 ]
             },
             {
@@ -383,20 +385,20 @@ export const formSections: Section[] = [
         questions: [
             {
                 id: "q51",
-                label: "De grens van All-in (Fair Use Policy)",
-                desc: "Onze vaste fee is op vertrouwen gebaseerd, zoals beschreven onder Fair Use in {{SLA}}. Mocht een collega stelselmatig excessief ondersteuning vragen op basale applicatie-(how to) niveau, dan plannen we een gesprek over wellicht wat betaalde training. Gaan we hier op dezelfde manier mee om?",
+                label: "Transparantie in de All-in Fee (Fair Use Policy)",
+                desc: "Onze All-in fee (Fixed Fee) is transparant en ontzorgt jullie van onverwachte IT-facturen per minuut voor incidenten. Het dekt al het reguliere beheer, security patches en support bij onverwachte storingen (break-fix). Echter, verzoeken voor structurele wijzigingen (zoals het verplaatsen van een hele server of gelijktijdig aanmaken van veel accounts na overname) of extreem excessieve 'how-to' vragen, vallen onder projectwerk/training en buiten de vaste beheer-fee. Gaan we hier conform onze SLA als partners mee om?",
                 type: "radio",
                 options: [
-                    "Ja, we hanteren redelijkheid en waarderen meedenken bij zware belasting."
+                    "Akkoord. Regulier support en storingen vallen binnen de fee. Excessieve structurele wijzigingen of training wordt in overleg na goedkeuring apart behandeld."
                 ]
             },
             {
                 id: "q52",
-                label: "Aansprakelijkheid",
-                desc: "Als wij in advies (of een P3 ticket) urgentie aandragen omtrent veiligheid, en jullie besluiten budgettair af te wijken, dan valt aansprakelijkheid van gerelateerde calamiteiten buiten Workflo. Spreken we dit zo af?",
+                label: "Advies, Aansprakelijkheid en Eigen Keuzes",
+                desc: "Soms schieten beleidskeuzes en IT-budgetten tekort op het ideale veiligheidsniveau (zoals het bewust uitschakelen van backups of het niet verplichten van MFA). Als Workflo uit veiligheidsoogpunt formeel een upgrade adviseert (via een P3 of P4 risico-ticket), maar dit om budgettaire (of proces) redenen niet wordt uitgevoerd, wordt Workflo gevrijwaard van eventuele latere calamiteiten voortvloeiend uit dat specifieke issue.",
                 type: "radio",
                 options: [
-                    "Volledig begrepen en logisch."
+                    "Helder en volledig begrepen. Bewuste beslissingen om een risico (risk accept) te behouden, leidt tot uitsluiting van verantwoordelijkheid bij Workflo."
                 ]
             }
         ]

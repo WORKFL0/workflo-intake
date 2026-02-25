@@ -27,14 +27,14 @@ export const calculateScore = (formData: Record<string, any>) => {
     }
 
     // Backup
-    if (formData['q37']?.includes('Cloud Backup is vitaal')) {
-        good.push("Data Veiligheid: Cloud Backup is direct gekozen voor zekerheid en ransomware bescherming.");
+    if (formData['q37']?.includes('externe backup van onze data is vitaal')) {
+        good.push("Data Veiligheid: Externe Backup is direct gekozen voor zekerheid en ransomware bescherming.");
     } else if (formData['q37']) {
         currentScore -= 20;
-        attention.push("Data Veiligheid (Kritiek): Er is gekozen om géén Cloud Backup te nemen. Enkel de 30-dagen prullenbak is aanwezig.");
+        attention.push("Data Veiligheid (Kritiek): Er is gekozen om géén externe backup te nemen. Enkel lokale/cloud prullenbakken zijn hierdoor aanwezig.");
     } else {
         currentScore -= 20;
-        attention.push("Ongedefinieerd (Cloud Backup): Geen beleid gekozen over Cloud Data bescherming. Zonder actieve backup lopen jullie ernstig risico bij ransomware.");
+        attention.push("Ongedefinieerd (Backup Policy): Geen beleid gekozen over data bescherming. Zonder actieve backup lopen jullie ernstig risico bij ransomware en data-corruptie.");
     }
 
     // Hardware / Purchasing
@@ -171,13 +171,13 @@ export const generatePDF = async (clientName: string, formData: Record<string, a
     yPos += 5;
 
     // Backup
-    addLine("Data Bescherming (Cloud Backup)", 11, true);
-    if (formData['q37']?.includes('Cloud Backup is vitaal')) {
-        addLine("AFSPRAAK: Actieve Third-Party Cloud Backup (exclusief Prullenbak) wordt ingeregeld.");
-        addLine("GEVOLG: Data is veiliggesteld tegen Ransomware en kan (in overleg) voor langere termijn hersteld worden. Restore verzoeken vallen binnen standaard dienstverlening.");
+    addLine("Data Bescherming (Externe Backup)", 11, true);
+    if (formData['q37']?.includes('externe backup van onze data is vitaal')) {
+        addLine("AFSPRAAK: Actieve Externe Secundaire Backup wordt ingeregeld (naast primaire cloud of NAS).");
+        addLine("GEVOLG: Data is veiliggesteld tegen Ransomware en kan voor langere termijn hersteld worden. Reguliere restore verzoeken vallen binnen standaard dienstverlening.");
     } else {
-        addLine("AFSPRAAK: ER IS GEEN GEAUTOMATISEERDE CLOUD BACKUP AFGESPROKEN. Klant vertrouwt enkel op de 30-dagen policy van Microsoft/Google.");
-        addLine("GEVOLG/RISICO (KRITIEK): Workflo kan per ongeluk of opzettelijk verwijderde data ouder dan 30 dagen NOOIT herstellen. Ook bij Ransomware is de kans op definitief dataverlies 100%. Klant accepteert dit verhoogde risico.");
+        addLine("AFSPRAAK: ER IS GEEN GEAUTOMATISEERDE EXTERNE DATA BACKUP AFGESPROKEN. Klant vertrouwt enkel op de prullenbak van de applicatie of een niet-versiebeheer systeem.");
+        addLine("GEVOLG/RISICO (KRITIEK): Workflo kan per ongeluk of opzettelijk verwijderde data ouder dan de applicatie retentie-periode NOOIT herstellen. Ook bij Cryptolockers/Ransomware is de kans op definitief dataverlies 100%. Klant accepteert dit verhoogde risico op eigen bedrijfscontinuïteit.");
     }
     yPos += 5;
 
