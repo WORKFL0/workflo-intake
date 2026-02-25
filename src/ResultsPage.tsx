@@ -252,9 +252,9 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
         yPos += 5;
 
         try {
-            const sigBase64 = await getBase64ImageFromUrl('/signature.png');
+            const sigBase64 = await getBase64ImageFromUrl('/signature.jpg');
             // Add signature image under "Handtekening Workflo"
-            doc.addImage(sigBase64, 'PNG', 15, yPos, 40, 15);
+            doc.addImage(sigBase64, 'JPEG', 15, yPos, 40, 15);
         } catch (e) {
             console.warn("Signature not found or could not be loaded");
         }
