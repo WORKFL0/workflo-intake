@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
+import { calculateScore, generatePDF, generateTXT, getQuestionLabels } from './utils';
 import './index.css';
 
 interface IntakeItem {
@@ -17,6 +18,11 @@ const Dashboard: React.FC = () => {
     const [intakes, setIntakes] = useState<IntakeItem[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [questionLabels, setQuestionLabels] = useState<Record<string, string>>({});
+
+    useEffect(() => {
+        setQuestionLabels(getQuestionLabels());
+    }, []);
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
@@ -98,22 +104,59 @@ const Dashboard: React.FC = () => {
                 <div className="section-card" style={{ textAlign: 'center' }}>Nog geen intakes gevonden in de database.</div>
             ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                    {intakes.map((intake) => (
-                        <div key={intake.id} className="section-card">
-                            <h2 style={{ color: '#10b981', marginBottom: '10px' }}>{intake.client_name}</h2>
-                            <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '15px' }}>
-                                Aangemaakt op: {new Date(intake.created_at).toLocaleString('nl-NL')} <br />
-                                Locatie: {intake.client_address}, {intake.client_city}
-                            </p>
+                    {intakes.map((intake) => {
+                        const { score } = calculateScore(intake.answers);
+                        const labelKeys = Object.keys(intake.answers);
+                        return (
+                            <div key={intake.id} className="section-card">
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                    <h2 style={{ color: '#10b981', margin: 0 }}>{intake.client_name}</h2>
+                                    <div style={{ background: '#10b981', color: '#111827', padding: '5px 12px', borderRadius: '20px', fontWeight: 'bold' }}>
+                                        Score: {score}/100
+                                    </div>
+                                </div>
+                                <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '15px' }}>
+                                    Aangemaakt op: {new Date(intake.created_at).toLocaleString('nl-NL')} <br />
+                                    Locatie: {intake.client_address}, {intake.client_city}
+                                </p>
 
-                            <h3 style={{ marginBottom: '10px', color: 'var(--accent-yellow)' }}>Gegeven Antwoorden (Ruwe Data):</h3>
-                            <div style={{ background: 'rgba(11, 17, 32, 0.6)', padding: '15px', borderRadius: '8px', overflowX: 'auto' }}>
-                                <pre style={{ fontSize: '0.85rem', color: '#cbd5e1', margin: 0 }}>
-                                    {JSON.stringify(intake.answers, null, 2)}
-                                </pre>
+                                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+                                    <button
+                                        className="submit-btn"
+                                        onClick={() => generatePDF(intake.client_name, intake.answers, score)}
+                                        style={{ padding: '8px 15px', fontSize: '0.9rem', minWidth: 'auto', background: '#3b82f6', color: '#fff', border: 'none' }}>
+                                        Export PDF
+                                    </button>
+                                    <button
+                                        className="submit-btn"
+                                        onClick={() => generateTXT(intake.client_name, intake.answers, score)}
+                                        style={{ padding: '8px 15px', fontSize: '0.9rem', minWidth: 'auto', background: 'transparent', color: '#eab308', border: '1px solid #eab308' }}>
+                                        Export TXT
+                                    </button>
+                                </div>
+
+                                <h3 style={{ marginBottom: '10px', color: 'var(--accent-yellow)', fontSize: '1.1rem' }}>Gegeven Antwoorden:</h3>
+                                <div style={{ background: 'rgba(11, 17, 32, 0.6)', padding: '15px', borderRadius: '8px' }}>
+                                    {labelKeys.length > 0 ? (
+                                        labelKeys.map((key) => {
+                                            const questionLabel = questionLabels[key] || key;
+                                            const rawValue = intake.answers[key];
+                                            const valueStr = Array.isArray(rawValue) ? rawValue.join(', ') : String(rawValue);
+                                            return (
+                                                <div key={key} style={{ marginBottom: '15px' }}>
+                                                    <div style={{ color: '#cbd5e1', fontWeight: 600, fontSize: '0.95rem', marginBottom: '4px' }}>{questionLabel}</div>
+                                                    <div style={{ color: '#94a3b8', fontSize: '0.9rem', paddingLeft: '10px', borderLeft: '2px solid #3b82f6' }}>{valueStr}</div>
+                                                </div>
+                                            );
+                                        })
+                                    ) : (
+                                        <div style={{ color: '#94a3b8', fontStyle: 'italic' }}>Geen antwoorden geregistreerd.</div>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })
+                    }
                 </div>
             )}
         </div>

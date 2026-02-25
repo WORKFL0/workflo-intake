@@ -10,10 +10,15 @@ const supabase = createClient(supabaseUrl!, supabaseAnonKey!)
 async function run() {
     const { data, error } = await supabase
         .from('intakes')
-        .select('*')
-        .limit(1)
+        .insert([{
+            client_name: 'Test TestCompany',
+            client_address: '123 Test St',
+            client_city: 'Testville',
+            answers: { 'q1': 'test' }
+        }])
+        .select() // Ask supabase to return the inserted row
 
-    console.log("data:", data)
-    console.log("error:", error)
+    console.log("INSERT data:", data)
+    console.log("INSERT error:", error)
 }
 run()

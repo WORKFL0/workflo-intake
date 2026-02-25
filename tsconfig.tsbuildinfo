@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/dashboard.tsx","./src/resultspage.tsx","./src/slapage.tsx","./src/data.ts","./src/main.tsx","./src/supabaseclient.ts","./src/vite-env.d.ts"],"version":"5.9.3"}
+{"root":["./src/app.tsx","./src/dashboard.tsx","./src/resultspage.tsx","./src/slapage.tsx","./src/data.ts","./src/main.tsx","./src/supabaseclient.ts","./src/utils.ts","./src/vite-env.d.ts"],"version":"5.9.3"}
