@@ -157,13 +157,15 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
         // Header styling and logo
         try {
             const logoBase64 = await getBase64ImageFromUrl('/logo.png');
-            // Adding logo at the top right, dimensions 40x13
-            doc.addImage(logoBase64, 'PNG', 150, 15, 40, 13);
+            // Adding logo at the top left, dimensions 40x13
+            doc.addImage(logoBase64, 'PNG', 20, 15, 40, 13);
         } catch (e) {
             console.warn("Logo not found or could not be loaded");
         }
 
-        addLine("WORKFLO IT - SERVICE OVEREENKOMST", 18, true);
+        yPos += 15; // Extra spacing below the logo
+
+        addLine("IT SERVICE OVEREENKOMST", 18, true);
         yPos += 5;
         addLine(`Opgesteld voor: ${clientName}`, 12, true);
         addLine(`Datum: ${new Date().toLocaleDateString('nl-NL')}`, 10);
