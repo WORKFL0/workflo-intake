@@ -114,38 +114,102 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
         const doc = new jsPDF()
         doc.setFont("helvetica")
 
-        // Titel
-        doc.setFontSize(22)
-        doc.text("Workflo Service Overeenkomst", 20, 20)
+        // Define margins and line heights
+        const margin = 20;
+        const pageHeight = 280;
+        let yPos = margin;
 
-        doc.setFontSize(12)
-        doc.text(`Klant: ${clientName}`, 20, 30)
-        doc.text(`Datum: ${new Date().toLocaleDateString('nl-NL')}`, 20, 38)
-        doc.text(`Workflo IT Alignment Score: ${score}/100`, 20, 46)
+        const addLine = (text: string, fontSize = 10, isBold = false) => {
+            doc.setFontSize(fontSize);
+            doc.setFont("helvetica", isBold ? "bold" : "normal");
+            const splitLines = doc.splitTextToSize(text, 170);
 
-        doc.line(20, 52, 190, 52)
-
-        let yPos = 62;
-        doc.setFontSize(14)
-        doc.text("Vastgestelde Policies", 20, yPos)
-        yPos += 10
-
-        doc.setFontSize(10)
-
-        const questionsAndAnswers = Object.entries(formData).map(([key, value]) => {
-            const displayValue = Array.isArray(value) ? value.join(', ') : value;
-            return `Onderwerp (${key}): ${displayValue}`;
-        });
-
-        questionsAndAnswers.forEach((line) => {
-            const splitLines = doc.splitTextToSize(line, 170)
-            if (yPos + (splitLines.length * 5) > 280) {
-                doc.addPage()
-                yPos = 20
+            if (yPos + (splitLines.length * (fontSize * 0.5)) > pageHeight) {
+                doc.addPage();
+                yPos = margin;
             }
-            doc.text(splitLines, 20, yPos)
-            yPos += (splitLines.length * 6) + 4
-        })
+
+            doc.text(splitLines, margin, yPos);
+            yPos += (splitLines.length * (fontSize * 0.5)) + 4;
+            doc.setFont("helvetica", "normal"); // reset
+        };
+
+        // Header
+        addLine("WORKFLO IT - SERVICE OVEREENKOMST", 20, true);
+        yPos += 5;
+        addLine(`Opgesteld voor: ${clientName}`, 12, true);
+        addLine(`Datum: ${new Date().toLocaleDateString('nl-NL')}`, 10);
+        addLine(`Workflo IT Alignment Score: ${score}/100`, 10, true);
+        yPos += 5;
+        doc.line(margin, yPos, 190, yPos);
+        yPos += 10;
+
+        addLine("1. Inleiding", 14, true);
+        addLine("Deze bijlage specificeert de geselecteerde IT-policies en werkafspraken zoals vastgelegd in de intake. De keuzes die hierin zijn gemaakt hebben directe invloed op de vaste beheer-fee (Fixed Fee) vs. werkzaamheden die buiten scope / nacalculatie vallen.");
+        yPos += 5;
+
+        addLine("2. Vastgelegde Policies en Voorwaarden", 14, true);
+
+        // Local Admin
+        addLine("Werkplekbeheer (Lokale Admin Rechten)", 11, true);
+        if (formData['q_admin1']?.includes('Geen Local Admin')) {
+            addLine("AFSPRAAK: Gebruikers hebben standaard GEEN lokale beheerdersrechten. Dit is de aanbevolen veilige standaard.");
+            addLine("GEVOLG: De werkplek is gemanaged via Workflo. Storingen door ongeautoriseerde software-installaties zijn hiermee gemitigeerd en vallen binnen de standaard support voorwaarden.");
+        } else {
+            addLine("AFSPRAAK: Gebruikers of een selecte groep krijgen wél Lokale Beheerdersrechten (Local Admin).");
+            addLine("GEVOLG/RISICO: Dit brengt aanzienlijke risico's met zich mee omtrent schaduw-IT, malware en virussen. Herstelwerkzaamheden of herinstallaties van apparaten of data als direct gevolg van het foutief gebruik hiervan, vallen UITDRUKKELIJK BUITEN DE SCOPE van de Fixed Fee en worden obv nacalculatie hersteld.");
+        }
+        yPos += 5;
+
+        // MFA
+        addLine("Identiteit & Toegangsbeveiliging (MFA)", 11, true);
+        if (formData['q25']?.includes('100% mee eens')) {
+            addLine("AFSPRAAK: Multi-Factor Authenticatie (MFA) is verplicht voor 100% van de gebruikers.");
+            addLine("GEVOLG: Uitstekende beveiliging. Supportvragen rondom inloggen worden gedekt.");
+        } else {
+            addLine("AFSPRAAK: MFA is niet voor alle gebruikers geforceerd.");
+            addLine("GEVOLG/RISICO: Gecompromitteerde (gehackte) accounts en de bijbehorende uren om e-mail/data te herstellen of veilig te stellen vallen BUITEN SCOPE. Workflo kan niet aansprakelijk gesteld worden voor dataverlies veroorzaakt door het ontbreken van MFA.");
+        }
+        yPos += 5;
+
+        // Backup
+        addLine("Data Bescherming (Cloud Backup)", 11, true);
+        if (formData['q37']?.includes('Cloud Backup is vitaal')) {
+            addLine("AFSPRAAK: Actieve Third-Party Cloud Backup (exclusief Prullenbak) wordt ingeregeld.");
+            addLine("GEVOLG: Data is veiliggesteld tegen Ransomware en kan (in overleg) voor langere termijn hersteld worden. Restore verzoeken vallen binnen standaard dienstverlening.");
+        } else {
+            addLine("AFSPRAAK: ER IS GEEN GEAUTOMATISEERDE CLOUD BACKUP AFGESPROKEN. Klant vertrouwt enkel op de 30-dagen policy van Microsoft/Google.");
+            addLine("GEVOLG/RISICO (KRITIEK): Workflo kan per ongeluk of opzettelijk verwijderde data ouder dan 30 dagen NOOIT herstellen. Ook bij Ransomware is de kans op definitief dataverlies 100%. Klant accepteert dit verhoogde risico.");
+        }
+        yPos += 5;
+
+        // Hardware Aanschaf
+        addLine("Hardware Levering & Installatie", 11, true);
+        if (formData['q9']?.includes('alles via Workflo te bestellen')) {
+            addLine("AFSPRAAK: Alle IT-Apparatuur wordt via Workflo aangeschaft.");
+            addLine("GEVOLG: Toestellen worden Zero-Touch direct gebruiksklaar afgeleverd bij medewerkers. Geen additionele setup-kosten.");
+        } else {
+            addLine("AFSPRAAK: Klant behoudt de wens om zelf elders consumenten-hardware aan te schaffen.");
+            addLine("GEVOLG/RISICO: Voor elk extern aangeschaft apparaat wat alsnog gemanaged of beveiligd moet worden in de bedrijfsinfrastructuur, rekent Workflo een standaard setup/handelingstoeslag per apparaat.");
+        }
+        yPos += 5;
+
+        // Hardware Lifecycle
+        addLine("Hardware Lifecycle (Vervanging)", 11, true);
+        if (formData['q11']?.includes('3 jaar') || formData['q11']?.includes('4 jaar')) {
+            addLine(`AFSPRAAK: Apparatuur wordt structureel vervangen met een cyclus van ${formData['q11']}.`);
+            addLine("GEVOLG: Gegarandeerd productieve medewerkers. Support is dekkend en efficiënt.");
+        } else {
+            addLine("AFSPRAAK: Apparatuur wordt 'fix-on-fail' pas vervangen wanneer het defect is, ongeacht leeftijd.");
+            addLine("GEVOLG/RISICO: Trage prestaties en niet-repareerbare apparaten. Complexe troubleshoot-werkzaamheden op verouderde apparaten (in de regel ouder dan 4/5 jaar) kunnen door Workflo belast worden als Buiten Scope.");
+        }
+        yPos += 5;
+
+        // Onboarding
+        addLine("3. Aanmelding Medewerkers & Onboarding", 14, true);
+        addLine(`Minimale aanlevertermijn voor introducties / HR doorvoer: ${formData['q6'] || 'Geen vaste afspraak gemaakt'}.`);
+        addLine("Spoedopdrachten ('We hebben morgen een nieuwe collega') zijn onderhevig aan beschikbaarheid van hardware en planning. Garanties op tijdige uitlevering vervallen indien de minimale termijn niet wordt gerespecteerd.");
+        yPos += 15;
 
         // Signatures
         if (yPos + 40 > 280) {
@@ -153,7 +217,6 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
             yPos = 20
         }
 
-        yPos += 20
         doc.line(20, yPos, 80, yPos)
         doc.line(110, yPos, 170, yPos)
         doc.text("Handtekening Workflo", 20, yPos + 6)
