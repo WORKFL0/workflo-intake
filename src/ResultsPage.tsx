@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import jsPDF from 'jspdf'
 
 interface ResultsPageProps {
     clientName: string;
@@ -109,12 +110,56 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
         URL.revokeObjectURL(url);
     };
 
-    const handleEmail = () => {
-        let body = `Beste,\n\nHierbij de ingevulde Workflo Intake van ${clientName}.\nVerwachte IT Alignment Score: ${score}/100\n\n`;
-        Object.entries(formData).forEach(([key, value]) => {
-            body += `-> ${key}: ${Array.isArray(value) ? value.join(', ') : value}\n`;
+    const handleDownloadPDF = () => {
+        const doc = new jsPDF()
+        doc.setFont("helvetica")
+
+        // Titel
+        doc.setFontSize(22)
+        doc.text("Workflo Service Overeenkomst", 20, 20)
+
+        doc.setFontSize(12)
+        doc.text(`Klant: ${clientName}`, 20, 30)
+        doc.text(`Datum: ${new Date().toLocaleDateString('nl-NL')}`, 20, 38)
+        doc.text(`Workflo IT Alignment Score: ${score}/100`, 20, 46)
+
+        doc.line(20, 52, 190, 52)
+
+        let yPos = 62;
+        doc.setFontSize(14)
+        doc.text("Vastgestelde Policies", 20, yPos)
+        yPos += 10
+
+        doc.setFontSize(10)
+
+        const questionsAndAnswers = Object.entries(formData).map(([key, value]) => {
+            const displayValue = Array.isArray(value) ? value.join(', ') : value;
+            return `Onderwerp (${key}): ${displayValue}`;
         });
-        window.location.href = `mailto:support@workflo.nl?subject=Intake Formulier: ${clientName}&body=${encodeURIComponent(body)}`;
+
+        questionsAndAnswers.forEach((line) => {
+            const splitLines = doc.splitTextToSize(line, 170)
+            if (yPos + (splitLines.length * 5) > 280) {
+                doc.addPage()
+                yPos = 20
+            }
+            doc.text(splitLines, 20, yPos)
+            yPos += (splitLines.length * 6) + 4
+        })
+
+        // Signatures
+        if (yPos + 40 > 280) {
+            doc.addPage()
+            yPos = 20
+        }
+
+        yPos += 20
+        doc.line(20, yPos, 80, yPos)
+        doc.line(110, yPos, 170, yPos)
+        doc.text("Handtekening Workflo", 20, yPos + 6)
+        doc.text(`Handtekening ${clientName}`, 110, yPos + 6)
+
+        doc.save(`Workflo_Overeenkomst_${clientName.replace(/\s+/g, '_')}.pdf`)
     };
 
     const getScoreColor = (s: number) => {
@@ -177,26 +222,47 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
             </div>
 
             <div className="section-card">
-                <h2 className="section-title">Hoe verwerken we dit in het systeem?</h2>
+                <h2 className="section-title">Maatwerk Voorbeeld: Onboarding Formulier</h2>
                 <p className="section-desc">
-                    We gebruiken deze inzichten om de basis in te richten. Mochten er rode vlaggen in de aandachtspunten staan,
-                    dan plannen wij nog een kort gesprek in. Omdat dit formulier nu geen actieve verbinding heeft, verzoeken wij jullie deze resultaten direct door te sturen of op te slaan:
+                    Op basis van jullie antwoorden (Minimale opzegtermijn: {formData['q6'] || 'Niet ingevuld'}) hebben we dit standaard aanvraagformulier voor jullie nieuwe medewerkers opgesteld. Deel deze eisen intern met HR/Management.
+                </p>
+                <div style={{ background: 'rgba(11, 17, 32, 0.6)', padding: '25px', borderRadius: '8px', border: '1px solid #334155' }}>
+                    <h3 style={{ color: '#fcd34d', marginBottom: '15px' }}>Nieuwe Medewerker Aanmelden</h3>
+                    <p style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '20px' }}>
+                        Vul de onderstaande verplichte velden in en schiet ze in via ons portals/ticketsysteem.
+                    </p>
+                    {Array.isArray(formData['q_onb1']) && formData['q_onb1'].length > 0 ? (
+                        <ul style={{ listStyleType: 'square', paddingLeft: '20px', color: '#f8fafc', fontSize: '0.95rem' }}>
+                            {formData['q_onb1'].map((veld: string, idx: number) => (
+                                <li key={idx} style={{ marginBottom: '8px' }}>{veld}</li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p style={{ color: '#ef4444', fontStyle: 'italic' }}>Jullie hebben hier nog geen datavelden voor gekozen in de intake.</p>
+                    )}
+                </div>
+            </div>
+
+            <div className="section-card">
+                <h2 className="section-title">IT Overeenkomst (PDF) Opslaan</h2>
+                <p className="section-desc">
+                    Nu we alle policies en inzichten hebben, kunnen jullie deze direct als PDF Overeenkomst ("Service Agreement") opslaan ter ondertekening of als document in het klantdossier.
                 </p>
 
                 <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>
                     <button
                         className="submit-btn"
-                        onClick={handleDownload}
-                        style={{ background: 'transparent', border: '2px solid var(--accent-yellow)', color: 'var(--accent-yellow)', minWidth: 'auto', padding: '12px 24px', fontSize: '1rem' }}
+                        onClick={handleDownloadPDF}
+                        style={{ background: '#10b981', border: 'none', color: '#fff', minWidth: 'auto', padding: '12px 24px', fontSize: '1rem', boxShadow: '0 4px 14px 0 rgba(16, 185, 129, 0.39)' }}
                     >
-                        📄 Sla op als .TXT
+                        📄 Download PDF Overeenkomst
                     </button>
                     <button
                         className="submit-btn"
-                        onClick={handleEmail}
-                        style={{ background: '#3b82f6', color: '#fff', border: 'none', minWidth: 'auto', padding: '12px 24px', fontSize: '1rem', boxShadow: '0 4px 14px 0 rgba(59, 130, 246, 0.39)' }}
+                        onClick={handleDownload}
+                        style={{ background: 'transparent', border: '2px solid var(--accent-yellow)', color: 'var(--accent-yellow)', minWidth: 'auto', padding: '12px 24px', fontSize: '1rem' }}
                     >
-                        ✉️ Mail naar Workflo
+                        💾 Ruwe TXT Data opslaan
                     </button>
                 </div>
 
