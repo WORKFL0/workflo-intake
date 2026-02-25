@@ -2,6 +2,7 @@ import jsPDF from 'jspdf';
 import { formSections } from './data';
 
 export const calculateScore = (formData: Record<string, any>) => {
+    formData = formData || {};
     let currentScore = 100;
     const good: string[] = [];
     const attention: string[] = [];
@@ -221,14 +222,14 @@ export const generatePDF = async (clientName: string, formData: Record<string, a
     yPos += 5;
 
     try {
-        const sigBase64 = await getBase64ImageFromUrl('/signature.jpg');
+        const sigBase64 = await getBase64ImageFromUrl('/signature.png');
         // Add signature image under "Handtekening Workflo"
-        doc.addImage(sigBase64, 'JPEG', 15, yPos, 40, 15);
+        doc.addImage(sigBase64, 'PNG', 15, yPos, 40, 20);
     } catch (e) {
         console.warn("Signature not found or could not be loaded");
     }
 
-    yPos += 20;
+    yPos += 30;
 
     doc.line(20, yPos, 80, yPos)
     doc.line(110, yPos, 170, yPos)
