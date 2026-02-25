@@ -110,7 +110,18 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
         URL.revokeObjectURL(url);
     };
 
-    const handleDownloadPDF = () => {
+    const getBase64ImageFromUrl = async (imageUrl: string): Promise<string> => {
+        const res = await fetch(imageUrl);
+        const blob = await res.blob();
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result as string);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+        });
+    };
+
+    const handleDownloadPDF = async () => {
         const doc = new jsPDF()
         doc.setFont("helvetica")
 
@@ -134,8 +145,25 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
             doc.setFont("helvetica", "normal"); // reset
         };
 
-        // Header
-        addLine("WORKFLO IT - SERVICE OVEREENKOMST", 20, true);
+        // Header styling and logo
+        try {
+            const logoBase64 = await getBase64ImageFromUrl('/logo.png');
+            // Adding logo at the top right, dimensions 40x13
+            doc.addImage(logoBase64, 'PNG', 150, 15, 40, 13);
+        } catch (e) {
+            console.warn("Logo not found or could not be loaded");
+        }
+
+        // Header styling and logo
+        try {
+            const logoBase64 = await getBase64ImageFromUrl('/logo.png');
+            // Adding logo at the top right, dimensions 40x13
+            doc.addImage(logoBase64, 'PNG', 150, 15, 40, 13);
+        } catch (e) {
+            console.warn("Logo not found or could not be loaded");
+        }
+
+        addLine("WORKFLO IT - SERVICE OVEREENKOMST", 18, true);
         yPos += 5;
         addLine(`Opgesteld voor: ${clientName}`, 12, true);
         addLine(`Datum: ${new Date().toLocaleDateString('nl-NL')}`, 10);
@@ -212,15 +240,29 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset
         yPos += 15;
 
         // Signatures
-        if (yPos + 40 > 280) {
+        if (yPos + 50 > 280) {
             doc.addPage()
             yPos = 20
         }
 
+        yPos += 10;
+        doc.text("Handtekening Workflo", 20, yPos)
+        doc.text(`Handtekening ${clientName}`, 110, yPos)
+
+        yPos += 5;
+
+        try {
+            const sigBase64 = await getBase64ImageFromUrl('/signature.png');
+            // Add signature image under "Handtekening Workflo"
+            doc.addImage(sigBase64, 'PNG', 15, yPos, 40, 15);
+        } catch (e) {
+            console.warn("Signature not found or could not be loaded");
+        }
+
+        yPos += 20;
+
         doc.line(20, yPos, 80, yPos)
         doc.line(110, yPos, 170, yPos)
-        doc.text("Handtekening Workflo", 20, yPos + 6)
-        doc.text(`Handtekening ${clientName}`, 110, yPos + 6)
 
         doc.save(`Workflo_Overeenkomst_${clientName.replace(/\s+/g, '_')}.pdf`)
     };
