@@ -303,7 +303,7 @@ function App() {
                 ))}
 
                 {/* Ondertekening en Akkoord */}
-                <div className="section-card" style={{ border: '2px solid var(--accent-yellow)', backgroundColor: 'rgba(242, 244, 0, 0.05)' }}>
+                <div className="section-card" style={{ border: '2px solid var(--accent-yellow)', backgroundColor: 'var(--card-bg)' }}>
                     <h2 className="section-title" style={{ color: 'var(--accent-yellow)' }}>Ondertekening & Akkoord</h2>
                     <p className="section-desc">We formaliseren deze SLA en IT afspraken graag helder.</p>
 
