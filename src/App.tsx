@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { formSections } from './data'
+import { useState, useEffect } from 'react'
+import { formSections, defaultFormData } from './data'
 import { supabase } from './supabaseClient'
 import SlaPage from './SlaPage'
 import ResultsPage from './ResultsPage'
@@ -13,9 +13,42 @@ function App() {
         signerName: ''
     })
     const [agreedToTerms, setAgreedToTerms] = useState(false)
-    const [formData, setFormData] = useState<Record<string, any>>({})
+    const [formData, setFormData] = useState<Record<string, any>>({ ...defaultFormData })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
+    const [currentIntakeId, setCurrentIntakeId] = useState<number | null>(null)
+    const [isLoadingIntake, setIsLoadingIntake] = useState(false)
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const intakeId = queryParams.get('id');
+        if (intakeId) {
+            setIsLoadingIntake(true);
+            const fetchIntake = async () => {
+                const { data, error } = await supabase
+                    .from('intakes')
+                    .select('*')
+                    .eq('id', intakeId)
+                    .single();
+
+                if (data && !error) {
+                    setCurrentIntakeId(data.id);
+                    setClientData({
+                        name: data.client_name || '',
+                        address: data.client_address || '',
+                        city: data.client_city || '',
+                        signerName: data.answers?._ondertekenaar || ''
+                    });
+
+                    const newFormData = { ...defaultFormData, ...(data.answers || {}) };
+                    setFormData(newFormData);
+                    setAgreedToTerms(data.answers?._akkoord_voorwaarden || false);
+                }
+                setIsLoadingIntake(false);
+            };
+            fetchIntake();
+        }
+    }, [])
 
     const handleClientChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setClientData(prev => ({
@@ -73,20 +106,25 @@ function App() {
         setIsSubmitting(true)
 
         try {
-            const { error } = await supabase
-                .from('intakes')
-                .insert([
-                    {
-                        client_name: clientData.name,
-                        client_address: clientData.address,
-                        client_city: clientData.city,
-                        answers: {
-                            ...formData,
-                            '_akkoord_voorwaarden': agreedToTerms,
-                            '_ondertekenaar': clientData.signerName
-                        }
-                    }
-                ])
+            const payload = {
+                client_name: clientData.name,
+                client_address: clientData.address,
+                client_city: clientData.city,
+                answers: {
+                    ...formData,
+                    '_akkoord_voorwaarden': agreedToTerms,
+                    '_ondertekenaar': clientData.signerName
+                }
+            };
+
+            let error;
+            if (currentIntakeId) {
+                const res = await supabase.from('intakes').update(payload).eq('id', currentIntakeId);
+                error = res.error;
+            } else {
+                const res = await supabase.from('intakes').insert([payload]);
+                error = res.error;
+            }
 
             if (error) {
                 console.error('Fout bij opslaan database:', error)
@@ -115,7 +153,7 @@ function App() {
                 clientName={clientData.name}
                 signerName={clientData.signerName}
                 formData={formData}
-                onReset={() => window.location.reload()}
+                onReset={() => window.location.href = window.location.pathname}
             />
         )
     }
@@ -127,6 +165,11 @@ function App() {
                 <p>Samen maken we warme, heldere afspraken, zodat IT soepel voor jullie werkt zonder verrassingen.</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center', marginTop: '15px' }}>
                     <p className="header-subtitle">Vul dit document samen in om onze samenwerking de best mogelijke start te geven.</p>
+                    {currentIntakeId && (
+                        <div style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', padding: '10px 20px', borderRadius: '8px', fontSize: '0.9rem', border: '1px solid #3b82f6', marginBottom: '10px' }}>
+                            Je bewerkt momenteel een bestaand dossier
+                        </div>
+                    )}
                     <button
                         type="button"
                         onClick={() => {

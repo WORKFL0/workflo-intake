@@ -14,6 +14,40 @@ export interface Section {
     questions: Question[];
 }
 
+export const defaultFormData: Record<string, any> = {
+    q_onb1: [
+        "Volledige naam (Zoals gebruikt in HR en communicatie)",
+        "Telefoonnummer (Cruciaal voor support en instellen van MFA)",
+        "Gewenste zakelijke email (bijv. voornaam.achternaam@bedrijf.nl)",
+        "Startdatum (en verwachte uitdiensttreding indien bekend)",
+        "Rol informatie (Functie / Afdeling / Directe Manager)"
+    ],
+    q2: "Data overdragen aan de manager (rechten delegeren) en 30 dagen bewaren",
+    q5: "Ja, we begrijpen dit proces en werken eraan mee.",
+    q6: "Minimaal 5 werkdagen van tevoren (standaard)",
+    q9: "We besluiten om alles via Workflo te bestellen voor het gemak.",
+    q11: "We schrijven af op 4 jaar",
+    q13: "We willen een vast pakket aan software door jullie laten certificeren (graag overleggen over een maatwerk fee).",
+    q14: "Microsoft 365 omgeving (via Workflo licenties)",
+    q15: "Tot €50 is direct akkoord om de medewerker snel te helpen.",
+    q16: "De grens is duidelijk; persoonlijke zaken vallen buiten het vaste contact.",
+    q17: "We hebben de responstijden gelezen en zijn er mee akkoord.",
+    q18: "Ja, iedereen wordt de juiste route gewezen (Ticketsysteem/Support Portal).",
+    q20: "Alleen op uurbasis als het probleem niet remote op te lossen is.",
+    q21: "Reguliere kantoortijden zijn meer dan voldoende.",
+    q_admin1: "Geen Local Admin voor gebruikers. (Workflo beheert applicaties veilig op afstand).",
+    q25: "100% mee eens, MFA voor iedereen ongeacht wrijving.",
+    q31: "We willen een strikte lockdown. Alleen zakelijke data mag erop (streng policy management nodig).",
+    q34: "Volledig of overwegend Cloud (Microsoft/Google Workspace).",
+    q37: "Ja. Actieve, externe backup van onze data is vitaal en we nemen dit standaard bij jullie af.",
+    q39: "Ja, heel graag alles onder één warm dak.",
+    q42: "Ja, wij gebruiken slimme moderne oplossingen (zoals Egnyte, LycidLink of ZTNA) voor naadloze remote toegang.",
+    q43: "Ja graag, en we betalen jullie met alle liefde de uren voor die ontzorging.",
+    q49: "Absoluut. We horen graag hoe jullie en wij presteren.",
+    q51: "Akkoord. Regulier support en storingen vallen binnen de fee. Excessieve structurele wijzigingen of training wordt in overleg na goedkeuring apart behandeld.",
+    q52: "Helder en volledig begrepen. Bewuste beslissingen om een risico (risk accept) te behouden, leidt tot uitsluiting van verantwoordelijkheid bij Workflo."
+};
+
 export const formSections: Section[] = [
     {
         title: "1. On/Offboarding (Nieuwe & Vertrekkende Collega's)",
@@ -121,9 +155,9 @@ export const formSections: Section[] = [
                 desc: "Na X jaar, of als de fabrikant geen updates meer geeft, adviseren wij vervanging. Na zo'n moment kunnen we stabiliteit niet meer garanderen en valt extra support buiten de basisdienst.",
                 type: "radio",
                 options: [
-                    "We schrijven af op 3 jaar",
                     "We schrijven af op 4 jaar",
-                    "We vervangen alleen als hij echt defect is en accepteren de eventuele risico's of support-kosten daarna."
+                    "We schrijven af op 5 jaar of langer",
+                    "We gebruiken apparatuur totdat de hardware of de software End-of-Life (onveilig) is (ca. 6 jaar)"
                 ]
             },
             {

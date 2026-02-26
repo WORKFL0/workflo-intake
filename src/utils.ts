@@ -49,8 +49,8 @@ export const calculateScore = (formData: Record<string, any>) => {
     }
 
     // Hardware Lifecycle
-    if (formData['q11']?.includes('3 jaar') || formData['q11']?.includes('4 jaar')) {
-        good.push("Hardware Lifecycle: Er is een duidelijke hardware afschrijving gekozen (3 tot 4 jaar).");
+    if (formData['q11']?.includes('4 jaar') || formData['q11']?.includes('5 jaar')) {
+        good.push("Hardware Lifecycle: Er is een duidelijke hardware afschrijving gekozen (4 of 5 jaar).");
     } else if (formData['q11']) {
         currentScore -= 10;
         attention.push("Hardware Lifecycle: Apparaten pas vervangen bij defecten verhoogt risico op acute downtime. Dit valt buiten scope na 'End-of-Life'.");
@@ -194,12 +194,12 @@ export const generatePDF = async (clientName: string, signerName: string, formDa
 
     // Hardware Lifecycle
     addLine("Hardware Lifecycle (Vervanging)", 11, true);
-    if (formData['q11']?.includes('3 jaar') || formData['q11']?.includes('4 jaar')) {
+    if (formData['q11']?.includes('4 jaar') || formData['q11']?.includes('5 jaar')) {
         addLine(`AFSPRAAK: Apparatuur wordt structureel vervangen met een cyclus van ${formData['q11']}.`);
         addLine("GEVOLG: Gegarandeerd productieve medewerkers. Support is dekkend en efficiënt.");
     } else {
-        addLine("AFSPRAAK: Apparatuur wordt 'fix-on-fail' pas vervangen wanneer het defect is, ongeacht leeftijd.");
-        addLine("GEVOLG/RISICO: Trage prestaties en niet-repareerbare apparaten. Complexe troubleshoot-werkzaamheden op verouderde apparaten (in de regel ouder dan 4/5 jaar) kunnen door Workflo belast worden als Buiten Scope.");
+        addLine("AFSPRAAK: Apparatuur wordt gestuurd 'End-of-life' (ca. 6+ jaar) of pas vervangen wanneer het defect is.");
+        addLine("GEVOLG/RISICO: Trage prestaties en niet-repareerbare apparaten. Complexe troubleshoot-werkzaamheden op verouderde apparaten (in de regel bij 6+ jaar en zonder fabrikant-updates) kunnen door Workflo belast worden als Buiten Scope.");
     }
     yPos += 5;
 
