@@ -17,13 +17,11 @@ function App() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
     const [currentIntakeId, setCurrentIntakeId] = useState<number | null>(null)
-    const [isLoadingIntake, setIsLoadingIntake] = useState(false)
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const intakeId = queryParams.get('id');
         if (intakeId) {
-            setIsLoadingIntake(true);
             const fetchIntake = async () => {
                 const { data, error } = await supabase
                     .from('intakes')
@@ -44,7 +42,6 @@ function App() {
                     setFormData(newFormData);
                     setAgreedToTerms(data.answers?._akkoord_voorwaarden || false);
                 }
-                setIsLoadingIntake(false);
             };
             fetchIntake();
         }
