@@ -60,7 +60,7 @@ const SlaPage: React.FC<SlaPageProps> = ({ onNavigateHome }) => {
                         <li>Herstel na grote onafwendbare calamiteiten (brand, diefstal, of grove nalatigheid gebruiker ten aanzien van onze policies).</li>
                         <li>Grote vernieuwingsprojecten, zoals netwerkvervanging of een migratie naar een geheel nieuw systeem. Superslim, maar dit kost uren en aparte projectaandacht.</li>
                     </ul>
-                    <p className="question-desc" style={{ color: '#fcd34d', backgroundColor: 'rgba(252, 211, 77, 0.1)', padding: '15px', borderRadius: '8px' }}>
+                    <p className="question-desc" style={{ color: '#f2f400', backgroundColor: 'rgba(242, 244, 0, 0.1)', padding: '15px', borderRadius: '8px' }}>
                         Dit soort project/herstel-werkzaamheden doen we uiteraard wel, maar <strong>altijd apart, vooraf afgestemd en geoffreerd</strong>. Daarmee krijgen jullie overigens een korting van 10% t.o.v. ons reguliere ad-hoc uurtarief.
                     </p>
                 </div>
@@ -106,21 +106,21 @@ const SlaPage: React.FC<SlaPageProps> = ({ onNavigateHome }) => {
                 <p className="section-desc">Snelle levering en een magische eerste werkdag.</p>
 
                 <div className="form-group" style={{ marginBottom: '25px' }}>
-                    <h3 style={{ color: '#fcd34d', marginBottom: '10px' }}>Het Onboarding Proces</h3>
+                    <h3 style={{ color: '#f2f400', marginBottom: '10px' }}>Het Onboarding Proces</h3>
                     <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
                         Wij ontvangen de onboarding request graag <strong>minimaal 5 werkdagen</strong> van tevoren in ons ticketsysteem. Dit geeft ons de tijd om accounts aan te maken, rechten te knopen en hardware gereed te maken. Minder dan 5 dagen? Dan kunnen we niet garanderen dat het op tijd perfect staat, of we moeten een spoed-opslag berekenen.
                     </p>
                 </div>
 
                 <div className="form-group" style={{ marginBottom: '25px' }}>
-                    <h3 style={{ color: '#fcd34d', marginBottom: '10px' }}>Flexibele & Eerlijke Hardware</h3>
+                    <h3 style={{ color: '#f2f400', marginBottom: '10px' }}>Flexibele & Eerlijke Hardware</h3>
                     <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
                         Hardware kán via ons aangeschaft worden (Zero-Touch ingericht), maar is geen verplichting. Bestel je via Workflo, dan geldt: wij hanteren <strong>exact dezelfde prijzen</strong> als de originele fabrikant (bijv. apple.nl) zonder verborgen marges. Daarnaast verzorgen wij dan de volledige garantie-afhandelingen binnen de vaste fee.
                     </p>
                 </div>
                 
                 <div className="form-group">
-                    <h3 style={{ color: '#fcd34d', marginBottom: '10px' }}>Zelf Hardware Besteld? Geen probleem</h3>
+                    <h3 style={{ color: '#f2f400', marginBottom: '10px' }}>Zelf Hardware Besteld? Geen probleem</h3>
                     <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
                         Bestellen jullie toch liever zelf hardware bij een externe prijsvechter? Geen probleem! Houd er wel rekening mee dat wij dan <strong>uurwerk</strong> (ca. 0,5u per device) moeten doorberekenen om deze apparatuur handmatig te koppelen (Enrolment) aan ons veilige beheer, omdat dit niet Zero-Touch vanuit de fabriek gaat.
                     </p>
@@ -132,21 +132,21 @@ const SlaPage: React.FC<SlaPageProps> = ({ onNavigateHome }) => {
                 <p className="section-desc">Wij fixen de IT, jullie blijven beslissingsbevoegd.</p>
 
                 <div className="form-group" style={{ marginBottom: '25px' }}>
-                    <h3 style={{ color: '#fcd34d', marginBottom: '10px' }}>De 'Lokale Administrator' gevarenzone</h3>
+                    <h3 style={{ color: '#f2f400', marginBottom: '10px' }}>De 'Lokale Administrator' gevarenzone</h3>
                     <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
                         Wij raden altijd aan: <em>Medewerkers mogen niet zomaar zelf alles installeren</em>. Doen ze dit wel, dan is er kans op (verborgen) malware of chaos. Willen jullie medewerkers de installatie-rechten (Local Admin) wél behouden om lokaal flexibel te zijn? Dat mag! Echter vallen herstel-uren voor zelf veroorzaakte systeemschade of ransomware die daaruit voortvloeit buiten de reguliere fee (billable).
                     </p>
                 </div>
 
                 <div className="form-group" style={{ marginBottom: '25px' }}>
-                    <h3 style={{ color: '#fcd34d', marginBottom: '10px' }}>Op Tijd Doorgeven (Offboarding)</h3>
+                    <h3 style={{ color: '#f2f400', marginBottom: '10px' }}>Op Tijd Doorgeven (Offboarding)</h3>
                     <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
                         Gaat er iemand uit dienst? Laat het tijdig weten in ons portaal! Licenties stoppen niet automatisch na een laatste werkdag. Zijn we hier niet van op de hoogte, dan lopen deze kosten onnodig door en valt die specifieke administratieve overhead buiten de Workflo verantwoordelijkheid.
                     </p>
                 </div>
 
                 <div className="form-group">
-                    <h3 style={{ color: '#fcd34d', marginBottom: '10px' }}>Veiligheid Eerst: Backup & MFA</h3>
+                    <h3 style={{ color: '#f2f400', marginBottom: '10px' }}>Veiligheid Eerst: Backup & MFA</h3>
                     <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
                         Wij eisen het gebruik van MFA (twee-staps verificatie) en pleiten altijd sterk voor structurele Cloud Backups. Weigeren jullie (bijv. wegens workflow-weerstand of budget) structureel en aantoonbaar om dit te handhaven, dan is onze support nog evengoed geweldig, maar accepteert de organisatie formeel zelf het calamiteiten-risico richting aansprakelijkheidsverzekeraars.
                     </p>

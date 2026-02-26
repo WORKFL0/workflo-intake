@@ -86,7 +86,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, signerName, formD
                     Op basis van jullie antwoorden (Minimale opzegtermijn: {formData['q6'] || 'Niet ingevuld'}) hebben we dit standaard aanvraagformulier voor jullie nieuwe medewerkers opgesteld. Deel deze eisen intern met HR/Management.
                 </p>
                 <div style={{ background: 'rgba(11, 17, 32, 0.6)', padding: '25px', borderRadius: '8px', border: '1px solid #334155' }}>
-                    <h3 style={{ color: '#fcd34d', marginBottom: '15px' }}>Nieuwe Medewerker Aanmelden</h3>
+                    <h3 style={{ color: '#f2f400', marginBottom: '15px' }}>Nieuwe Medewerker Aanmelden</h3>
                     <p style={{ fontSize: '0.9rem', color: '#94a3b8', marginBottom: '20px' }}>
                         Vul de onderstaande verplichte velden in en schiet ze in via ons portals/ticketsysteem.
                     </p>

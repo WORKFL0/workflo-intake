@@ -8,11 +8,11 @@
   --card-bg-solid: #0f172a;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --accent-yellow: #fcd34d;
-  --accent-yellow-hover: #fbbf24;
+  --accent-yellow: #f2f400;
+  --accent-yellow-hover: #e0e200;
   --border-color: #334155;
   --input-bg: rgba(11, 17, 32, 0.8);
-  --focus-ring: rgba(252, 211, 77, 0.4);
+  --focus-ring: rgba(242, 244, 0, 0.4);
 }
 
 * {
@@ -103,7 +103,7 @@ h4 {
 .section-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-  border-color: rgba(252, 211, 77, 0.3);
+  border-color: rgba(242, 244, 0, 0.3);
 }
 
 .client-info-card {
@@ -257,13 +257,13 @@ h4 {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px 0 rgba(252, 211, 77, 0.39);
+  box-shadow: 0 4px 14px 0 rgba(242, 244, 0, 0.39);
 }
 
 .submit-btn:hover:not(:disabled) {
   background-color: var(--accent-yellow-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(252, 211, 77, 0.4);
+  box-shadow: 0 6px 20px rgba(242, 244, 0, 0.4);
 }
 
 .submit-btn:disabled {
