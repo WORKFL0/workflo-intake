@@ -3,21 +3,22 @@ import { calculateScore, generateTXT, generatePDF } from './utils'
 
 interface ResultsPageProps {
     clientName: string;
+    signerName: string;
     formData: Record<string, any>;
     onReset: () => void;
 }
 
-const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, formData, onReset }) => {
+const ResultsPage: React.FC<ResultsPageProps> = ({ clientName, signerName, formData, onReset }) => {
     const { score, goodPoints, attentionPoints } = useMemo(() => {
         return calculateScore(formData);
     }, [formData]);
 
     const handleDownload = () => {
-        generateTXT(clientName, formData, score);
+        generateTXT(clientName, signerName, formData, score);
     };
 
     const handleDownloadPDF = async () => {
-        await generatePDF(clientName, formData, score);
+        await generatePDF(clientName, signerName, formData, score);
     };
 
     const getScoreColor = (s: number) => {

@@ -123,13 +123,19 @@ const Dashboard: React.FC = () => {
                                 <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
                                     <button
                                         className="submit-btn"
-                                        onClick={() => setTimeout(() => generatePDF(intake.client_name, intake.answers, score), 10)}
+                                        onClick={() => setTimeout(() => {
+                                            const signer = intake.answers._ondertekenaar || intake.client_name;
+                                            generatePDF(intake.client_name, signer, intake.answers, score);
+                                        }, 10)}
                                         style={{ padding: '8px 15px', fontSize: '0.9rem', minWidth: 'auto', background: '#3b82f6', color: '#fff', border: 'none' }}>
                                         Export PDF
                                     </button>
                                     <button
                                         className="submit-btn"
-                                        onClick={() => setTimeout(() => generateTXT(intake.client_name, intake.answers, score), 10)}
+                                        onClick={() => setTimeout(() => {
+                                            const signer = intake.answers._ondertekenaar || intake.client_name;
+                                            generateTXT(intake.client_name, signer, intake.answers, score);
+                                        }, 10)}
                                         style={{ padding: '8px 15px', fontSize: '0.9rem', minWidth: 'auto', background: 'transparent', color: '#eab308', border: '1px solid #eab308' }}>
                                         Export TXT
                                     </button>

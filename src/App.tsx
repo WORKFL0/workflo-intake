@@ -9,8 +9,10 @@ function App() {
     const [clientData, setClientData] = useState({
         name: '',
         address: '',
-        city: ''
+        city: '',
+        signerName: ''
     })
+    const [agreedToTerms, setAgreedToTerms] = useState(false)
     const [formData, setFormData] = useState<Record<string, any>>({})
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
@@ -78,7 +80,11 @@ function App() {
                         client_name: clientData.name,
                         client_address: clientData.address,
                         client_city: clientData.city,
-                        answers: formData
+                        answers: {
+                            ...formData,
+                            '_akkoord_voorwaarden': agreedToTerms,
+                            '_ondertekenaar': clientData.signerName
+                        }
                     }
                 ])
 
@@ -107,6 +113,7 @@ function App() {
         return (
             <ResultsPage
                 clientName={clientData.name}
+                signerName={clientData.signerName}
                 formData={formData}
                 onReset={() => window.location.reload()}
             />
@@ -254,6 +261,43 @@ function App() {
                         ))}
                     </div>
                 ))}
+
+                {/* Ondertekening en Akkoord */}
+                <div className="section-card" style={{ border: '2px solid var(--accent-yellow)', backgroundColor: 'rgba(252, 211, 77, 0.05)' }}>
+                    <h2 className="section-title" style={{ color: 'var(--accent-yellow)' }}>Ondertekening & Akkoord</h2>
+                    <p className="section-desc">We formaliseren deze SLA en IT afspraken graag helder.</p>
+
+                    <div className="form-group">
+                        <label className="question-label" htmlFor="signerName">
+                            Naam ondertekenaar <span style={{ color: '#ef4444' }}>*</span>
+                        </label>
+                        <span className="question-desc">Voor overleg en administratieve goedkeuring.</span>
+                        <input
+                            type="text"
+                            id="signerName"
+                            required
+                            className="input-text"
+                            placeholder="Jouw volledige naam"
+                            value={clientData.signerName}
+                            onChange={(e) => setClientData({ ...clientData, signerName: e.target.value })}
+                        />
+                    </div>
+
+                    <div className="form-group" style={{ marginTop: '20px' }}>
+                        <label className="checkbox-label" style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                            <input
+                                type="checkbox"
+                                required
+                                checked={agreedToTerms}
+                                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                                style={{ marginTop: '5px' }}
+                            />
+                            <span>
+                                Ik ga namens dit bedrijf akkoord met de {renderDesc('{{SLA}}')} van Workflo, incl. vaste fee en uitsluitingen, en verklaar deze intake naar waarheid te hebben ingevuld. <span style={{ color: '#ef4444' }}>*</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
 
                 <div className="submit-section">
                     <p className="submit-note">Door op verzenden te klikken, worden deze antwoorden veilig opgeslagen in onze database en gekoppeld aan jullie klantdossier. Zo kunnen we direct met de juiste context support leveren.</p>

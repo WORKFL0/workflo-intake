@@ -98,7 +98,7 @@ export const getBase64ImageFromUrl = async (imageUrl: string): Promise<string> =
     });
 };
 
-export const generatePDF = async (clientName: string, formData: Record<string, any>, score: number) => {
+export const generatePDF = async (clientName: string, signerName: string, formData: Record<string, any>, score: number) => {
     const doc = new jsPDF()
     doc.setFont("helvetica")
 
@@ -218,8 +218,9 @@ export const generatePDF = async (clientName: string, formData: Record<string, a
     yPos += 10;
     doc.text("Handtekening Workflo", 20, yPos)
     doc.text(`Handtekening ${clientName}`, 110, yPos)
+    doc.text(`(${signerName || 'Geautoriseerde'})`, 110, yPos + 5)
 
-    yPos += 5;
+    yPos += 10;
 
     try {
         const sigBase64 = await getBase64ImageFromUrl('/signature.jpg');
@@ -237,8 +238,8 @@ export const generatePDF = async (clientName: string, formData: Record<string, a
     doc.save(`Workflo_Overeenkomst_${clientName.replace(/\s+/g, '_')}.pdf`)
 };
 
-export const generateTXT = (clientName: string, formData: Record<string, any>, score: number) => {
-    let text = `Workflo Intake Formulier Resultaten\nKlant: ${clientName}\nScore: ${score}/100\n\n=== Antwoorden ===\n`;
+export const generateTXT = (clientName: string, signerName: string, formData: Record<string, any>, score: number) => {
+    let text = `Workflo Intake Formulier Resultaten\nKlant: ${clientName}\nOndertekenaar: ${signerName || 'Onbekend'}\nScore: ${score}/100\n\n=== Antwoorden ===\n`;
     Object.entries(formData).forEach(([key, value]) => {
         text += `Vraag (${key}):\n${Array.isArray(value) ? value.join(', ') : value}\n\n`;
     });

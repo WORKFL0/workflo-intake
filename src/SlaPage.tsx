@@ -17,126 +17,130 @@ const SlaPage: React.FC<SlaPageProps> = ({ onNavigateHome }) => {
             </div>
 
             <div className="section-card">
-                <h2 className="section-title">1. Prioriteiten: Hoe snel komen we in actie?</h2>
-                <p className="section-desc">Net als bij de dokter hebben we een triagesysteem. Bij een schaafwond word je geholpen, maar een hartstilstand gaat natuurlijk altijd voor. Zo doen wij dat ook:</p>
+                <h2 className="section-title">1. Onze Filosofie (Waarom Workflo werkt)</h2>
+                <p className="question-desc" style={{ color: '#f8fafc', marginBottom: '15px' }}>
+                    Bij traditionele systeembeheerders of strippenkaarten geldt vaak: <em>meer problemen = meer uren = hogere kosten</em>. Er is weinig prikkel om structureel te automatiseren of te verbeteren.<br /><br />
+                    Bij ons is dat precies andersom. Wij verdienen ons geld niet aan het maken van uren, maar aan het voorkomen van problemen. Wij investeren vooraf in:
+                </p>
+                <ul style={{ color: '#10b981', fontWeight: 'bold', lineHeight: '1.8', marginLeft: '20px', marginBottom: '15px' }}>
+                    <li>Standaardisatie</li>
+                    <li>Automatisering</li>
+                    <li>Preventie</li>
+                </ul>
+                <p className="section-desc">
+                    Zodat jullie IT vooral saai en stabiel is — en dat is precies wat je wilt. Hoe minder problemen jullie hebben, hoe beter dit model werkt: voor jullie én voor ons.
+                </p>
+            </div>
+
+            <div className="section-card">
+                <h2 className="section-title">2. De Vaste Fee (All-in)</h2>
+                <p className="section-desc">
+                    Workflo werkt met een vaste maandprijs van <strong>€ 55,- per medewerker per maand</strong>. In die fee zit alles wat nodig is om de dagelijkse IT gewoon goed, veilig en voorspelbaar te laten draaien.
+                </p>
+
+                <div className="form-group" style={{ marginBottom: '30px' }}>
+                    <h3 style={{ color: '#10b981', marginBottom: '15px' }}>Wat zit er wél in de vaste fee?</h3>
+                    <ul style={{ color: '#f8fafc', lineHeight: '1.8', marginLeft: '20px' }}>
+                        <li><strong>Dagelijkse Support:</strong> Hulp bij problemen met laptops, desktops, e-mail, Office, printers en netwerk (wifi).</li>
+                        <li><strong>Ondersteuning op afstand:</strong> Waar mogelijk lossen we problemen direct op met minimale downtime.</li>
+                        <li><strong>Ondersteuning op locatie:</strong> Wanneer nodig zijn we binnen 4 uur ter plaatse.</li>
+                        <li><strong>Proactief beheer:</strong> Updates, monitoring en onderhoud op de achtergrond.</li>
+                        <li><strong>Beveiliging:</strong> Inclusief antivirus en security monitoring.</li>
+                        <li><strong>Automatisering:</strong> We automatiseren waar mogelijk om repeterende problemen te voorkomen.</li>
+                    </ul>
+                </div>
+
+                <div className="form-group">
+                    <h3 style={{ color: '#ef4444', marginBottom: '15px' }}>Wat zit er níet in?</h3>
+                    <p className="question-desc" style={{ color: '#94a3b8', marginBottom: '10px' }}>
+                        Niet alles is logisch om in een vaste maandprijs op te nemen. Zaken die hopelijk weinig voorkomen (maar wél veel tijd kosten), vallen hierbuiten. Denk aan:
+                    </p>
+                    <ul style={{ color: '#f8fafc', lineHeight: '1.8', marginLeft: '20px', marginBottom: '15px' }}>
+                        <li>Herstel na calamiteiten (brand, diefstal, volledige uitval, ransomware of grove nalatigheid gebruiker).</li>
+                        <li>Grote projecten, zoals netwerkvervanging of grote migraties.</li>
+                        <li>Uitzonderlijke klussen die losstaan van dagelijkse support.</li>
+                    </ul>
+                    <p className="question-desc" style={{ color: '#fcd34d', backgroundColor: 'rgba(252, 211, 77, 0.1)', padding: '15px', borderRadius: '8px' }}>
+                        Dit soort werkzaamheden doen we uiteraard wel, maar <strong>altijd apart, vooraf afgestemd en geoffreerd</strong>. Hiervoor geldt een project-uurtarief van <strong>€ 85,50</strong>. Daarmee krijgen jullie een korting van 10% t.o.v. ons reguliere ad-hoc tarief.
+                    </p>
+                </div>
+            </div>
+
+            <div className="section-card">
+                <h2 className="section-title">3. SLAs (Prioriteiten van Support)</h2>
+                <p className="section-desc">Net als bij de dokter hebben we een triagesysteem. Bij een schaafwond word je geholpen, maar een hartstilstand gaat natuurlijk altijd voor. Zo doen wij dat ook aan de hand van onze inbegrepen support-uren:</p>
 
                 <div className="priority-grid">
-                    <div className="form-group" style={{ marginBottom: '30px', padding: '20px', backgroundColor: 'rgba(239, 68, 68, 0.1)', borderLeft: '4px solid #ef4444', borderRadius: '8px' }}>
-                        <h3 style={{ color: '#ef4444', marginBottom: '10px' }}>P1 - Het Hele Bedrijf Ligt Stil (Kritiek)</h3>
-                        <p className="question-desc" style={{ color: '#f8fafc', marginBottom: '8px' }}>
-                            <strong>Wat is er aan de hand?</strong> Echt een noodsituatie. Niemand kan meer e-mailen, jullie belangrijkste bedrijfssoftware is gecrasht, of het hele kantoor zit zonder internet.
+                    <div className="form-group" style={{ marginBottom: '15px', padding: '15px', backgroundColor: 'rgba(239, 68, 68, 0.1)', borderLeft: '4px solid #ef4444', borderRadius: '8px' }}>
+                        <h3 style={{ color: '#ef4444', marginBottom: '5px', fontSize: '1.1rem' }}>P1 - Kritiek (Binnen 1 uur)</h3>
+                        <p className="question-desc" style={{ color: '#f8fafc', margin: 0 }}>
+                            Echt een noodsituatie. Het netwerk of hoofdsysteem (mail/server) ligt plat voor het hele bedrijf.
                         </p>
-                        <p className="question-desc"><strong>Wanneer reageren we?</strong> Binnen 1 uur laten we alles vallen om jullie te helpen.</p>
                     </div>
 
-                    <div className="form-group" style={{ marginBottom: '30px', padding: '20px', backgroundColor: 'rgba(249, 115, 22, 0.1)', borderLeft: '4px solid #f97316', borderRadius: '8px' }}>
-                        <h3 style={{ color: '#f97316', marginBottom: '10px' }}>P2 - Een Groep Mensen Heeft Problemen (Hoog)</h3>
-                        <p className="question-desc" style={{ color: '#f8fafc', marginBottom: '8px' }}>
-                            <strong>Wat is er aan de hand?</strong> Een specifieke afdeling kan niet werken, of een belangrijk systeem hapert flink (zoals de printer van afdeling sales), maar de rest van het bedrijf kan wel nog gewoon doorwerken.
+                    <div className="form-group" style={{ marginBottom: '15px', padding: '15px', backgroundColor: 'rgba(249, 115, 22, 0.1)', borderLeft: '4px solid #f97316', borderRadius: '8px' }}>
+                        <h3 style={{ color: '#f97316', marginBottom: '5px', fontSize: '1.1rem' }}>P2 - Hoog (Binnen 4 uur, op locatie indien nodig)</h3>
+                        <p className="question-desc" style={{ color: '#f8fafc', margin: 0 }}>
+                            Een specifieke afdeling, meeting room of kritisch individu ligt stil en kan niet werken.
                         </p>
-                        <p className="question-desc"><strong>Wanneer reageren we?</strong> Binnen 4 uur. We pakken dit dezelfde dag nog grondig voor je op.</p>
                     </div>
 
-                    <div className="form-group" style={{ padding: '20px', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderLeft: '4px solid #3b82f6', borderRadius: '8px' }}>
-                        <h3 style={{ color: '#3b82f6', marginBottom: '10px' }}>P3 - Standaard Verzoekjes (Normaal)</h3>
-                        <p className="question-desc" style={{ color: '#f8fafc', marginBottom: '8px' }}>
-                            <strong>Wat is er aan de hand?</strong> Dingen die handig zijn, maar geen brandmelding. "Ik wil graag een nieuwe draadloze muis", "Hoe maak ik een nieuwe handtekening aan in Outlook?", of "Kees krijgt volgende maand een nieuwe rol, en heeft vast de map 'Directie' nodig".
+                    <div className="form-group" style={{ padding: '15px', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderLeft: '4px solid #3b82f6', borderRadius: '8px' }}>
+                        <h3 style={{ color: '#3b82f6', marginBottom: '5px', fontSize: '1.1rem' }}>P3/P4 - Normaal (Binnen 8 uur reactie)</h3>
+                        <p className="question-desc" style={{ color: '#f8fafc', margin: 0 }}>
+                            "Ik wil een account aanvragen voor Kees", of "Hoe stel ik afwezigheid in?".
                         </p>
-                        <p className="question-desc"><strong>Wanneer reageren we?</strong> Binnen 8 uur. Afhankelijk van de wens plannen we dit relaxed met jullie in (doorgaans gefixt in 1 tot 3 werkdagen).</p>
                     </div>
                 </div>
             </div>
 
             <div className="section-card">
-                <h2 className="section-title">2. Wat betekent "All-in(begrepen)"?</h2>
-                <p className="section-desc">Simpel gezegd dekken we in onze vaste prijs alles wat nodig is om jullie <strong>bestaande, zakelijke systemen</strong> draaiende te houden. Wel zitten er logische grenzen aan onze toverkracht:</p>
+                <h2 className="section-title">4. Hardware (Flexibel & Transparant)</h2>
+                <p className="section-desc">Hardware kán via ons aangeschaft worden (Zero-Touch ingericht), maar is geen verplichting.</p>
+
+                <div className="form-group" style={{ marginBottom: '25px' }}>
+                    <h3 style={{ color: '#3b82f6', marginBottom: '10px' }}>Kies je hardware via Workflo, dan geldt:</h3>
+                    <ul style={{ color: '#f8fafc', lineHeight: '1.8', marginLeft: '20px' }}>
+                        <li>Wij hanteren <strong>exact dezelfde prijzen</strong> als de originele fabrikant (bijv. apple.nl).</li>
+                        <li>Géén opslag, géén verborgen marges.</li>
+                        <li>Wij verzorgen de <strong>volledige garantie-afhandeling</strong> naadloos binnen de fixed fee.</li>
+                    </ul>
+                </div>
 
                 <div className="form-group">
-                    <ul style={{ listStyleType: 'none', padding: 0 }}>
-                        <li style={{ marginBottom: '20px', display: 'flex', alignItems: 'flex-start', gap: '15px' }}>
-                            <span style={{ color: '#10b981', fontSize: '1.5rem', lineHeight: '1.2' }}>✓</span>
-                            <div>
-                                <strong style={{ display: 'block', fontSize: '1.1rem', marginBottom: '4px' }}>Inbegrepen: Het zakelijke fundament</strong>
-                                <span className="question-desc" style={{ color: '#f8fafc' }}>Vragen, storingen of support op de door ons geleverde laptops, Microsoft/Google accounts en kantoor-netwerken pakken we fluitend (en zonder extra factuur) voor je op via ons ticket systeem.</span>
-                            </div>
-                        </li>
-
-                        <li style={{ marginBottom: '20px', display: 'flex', alignItems: 'flex-start', gap: '15px' }}>
-                            <span style={{ color: '#ef4444', fontSize: '1.5rem', lineHeight: '1.2' }}>✗</span>
-                            <div>
-                                <strong style={{ display: 'block', fontSize: '1.1rem', marginBottom: '4px' }}>Niet inbegrepen: Privé apparatuur & Zelf gecreëerde chaos</strong>
-                                <span className="question-desc" style={{ color: '#f8fafc' }}>Werkt die privé Nintendo niet meer goed op jullie netwerk? Of heeft een medewerker na de de VrijMiBo de kantoorlaptop als onderzetter voor een mok koffie gebruikt en moeten we de data redden? Dan doen we ons best, maar brengen we wel de uren achteraf bij jullie in rekening.</span>
-                            </div>
-                        </li>
-
-                        <li style={{ marginBottom: '20px', display: 'flex', alignItems: 'flex-start', gap: '15px' }}>
-                            <span style={{ color: '#ef4444', fontSize: '1.5rem', lineHeight: '1.2' }}>✗</span>
-                            <div>
-                                <strong style={{ display: 'block', fontSize: '1.1rem', marginBottom: '4px' }}>Niet inbegrepen: Nieuwe Grote Projecten</strong>
-                                <span className="question-desc" style={{ color: '#f8fafc' }}>Verhuizen jullie naar een kantoor wat 3x zo groot is, of willen jullie alle data naar een totaal nieuw systeem migreren? Supertof! Maar dit kost meer uren en project-aandacht dan dagelijks beheer dekt. (Maken we apart een projectplan voor op).</span>
-                            </div>
-                        </li>
-
-                        <li style={{ display: 'flex', alignItems: 'flex-start', gap: '15px' }}>
-                            <span style={{ color: '#fcd34d', fontSize: '1.5rem', lineHeight: '1.2' }}>⚖️</span>
-                            <div>
-                                <strong style={{ display: 'block', fontSize: '1.1rem', marginBottom: '4px' }}>De 'Fair Use' Policy</strong>
-                                <span className="question-desc" style={{ color: '#f8fafc' }}>Wij tellen geen tickets. Of je collega nu 3x of 7x per maand een legitieme IT-vraag heeft, all-in is all-in. Maar als een specifieke medewerker wekelijks onzeker is "hoe hij Excel moet openen", plannen we liever even een gesprek in voor een (betaalde) basistraining dan dat hij oneindig gered moet worden. In de basis verwachten we dat iedereen met computers om kán gaan.</span>
-                            </div>
-                        </li>
+                    <h3 style={{ color: '#f97316', marginBottom: '10px' }}>Reparaties buiten fabrieksgarantie (Val/stootschade):</h3>
+                    <ul style={{ color: '#f8fafc', lineHeight: '1.8', marginLeft: '20px' }}>
+                        <li>Gaan altijd via onze vaste betrouwbare repairpartners.</li>
+                        <li>Worden vooraf besproken en netjes voorgelegd voor offerte-goedkeuring.</li>
                     </ul>
                 </div>
             </div>
 
             <div className="section-card">
-                <h2 className="section-title">3. Nieuwe Collega's & Hardware (Zero-Touch)</h2>
-                <p className="section-desc">Snelle levering en een magische eerste werkdag.</p>
+                <h2 className="section-title">5. Communicatiebeleid</h2>
+                <p className="section-desc">Geen verrassingen en korte lijntjes. Dat is wel zo prettig samenwerken.</p>
 
-                <div className="form-group" style={{ marginBottom: '25px' }}>
-                    <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>Het Onboarding Proces</label>
-                    <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
-                        Wij ontvangen de onboarding request graag <strong>minimaal 5 werkdagen</strong> van tevoren in ons ticketsysteem. Dit geeft ons de tijd om accounts aan te maken, rechten te knopen en hardware gereed te maken. Minder dan 5 dagen? Dan kunnen we niet garanderen dat het op tijd perfect staat, of we moeten een spoed-opslag berekenen.
-                    </p>
-                </div>
-
-                <div className="form-group">
-                    <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>Zero-Touch Hardware</label>
-                    <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
-                        Apparatuur die via Workflo besteld wordt, sturen we op de achtergrond ("Zero-Touch" via Apple Business Manager of Windows Autopilot) naar de nieuwe collega. Zodra zij de doos openen, configureert de laptop zichzelf. Bestellen jullie toch zelf hardware bij de MediaMarkt of online? Geen probleem, maar dan zijn wij <strong>meer uren</strong> (ongeveer 0,5u per device) kwijt aan handmatige acties (billable). Ook zijn garantie-afhandelingen dan aan jullie.
-                    </p>
-                </div>
+                <ul style={{ color: '#f8fafc', lineHeight: '1.8', marginLeft: '20px' }}>
+                    <li><strong>Medewerkers Contact:</strong> Medewerkers hebben direct contact met onze support via de online Support Portal voor minimale downtime.</li>
+                    <li><strong>Eén vast aanspreekpunt (IT Hero):</strong> Vragen we op de werkvloer voor efficiënte kostenafstemming, advies en structureel overleg op aan.</li>
+                    <li><strong>Kosten overleg:</strong> Werkzaamheden en kosten die buiten de eventuele vaste fee vallen, worden altijd <em>vooraf</em> overlegd met jullie eigen hoofdcontactpersoon.</li>
+                    <li><strong>Rapportage:</strong> Jullie ontvangen een helder maandelijks overzicht van uitgevoerde werkzaamheden door ons team.</li>
+                </ul>
             </div>
 
             <div className="section-card">
-                <h2 className="section-title">4. Wat we van jullie mogen verwachten</h2>
-                <p className="section-desc">Wij fixen de IT, jullie blijven in de lead van het bedrijf. Wat vragen we van jullie?</p>
-
-                <div className="form-group">
-                    <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>De 'Lokale Administrator' gevarenzone</label>
-                    <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
-                        Wij raden altijd aan: *Medewerkers mogen niet zomaar zelf alles installeren op hun zakelijke laptop*. Doen ze dit wel, is de kans groot dat ze per ongeluk foute software ("malware") en virussen installeren.
-                        Willen jullie medewerkers (of de baas) deze installatie-rechten (Local Admin) wél hebben om lokaal flexibel te zijn? Geen probleem! Echter zijn eventuele herstel-uren om de schade van de zelf ontstane computercrash dan wel rechtstreeks <strong>voor eigen rekening</strong>.
-                    </p>
-                </div>
-
-                <div className="form-group" style={{ marginTop: '25px' }}>
-                    <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>Tijdig Doorgeven (Anders betaal je voor lucht)</label>
-                    <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
-                        Gaat er iemand uit dienst? Laat het tijdig weten! Licenties voor software stoppen niet automatisch zodra iemand zijn laatste werkdag heeft gehad. Geven jullie dit niet (uit jezelf) door, dan betalen jullie onnodig licentiekosten en valt de verantwoordelijkheid hiervoor lokaal. Geef wijzigingen dus door via het ticket systeem!
-                    </p>
-                </div>
-
-                <div className="form-group" style={{ marginTop: '25px' }}>
-                    <label className="question-label" style={{ color: '#fcd34d', fontSize: '1.15rem' }}>Veiligheid eerst: Backup & MFA</label>
-                    <p className="question-desc" style={{ color: '#f8fafc', fontSize: '1rem', marginTop: '6px' }}>
-                        Wij eisen het gebruik van MFA (inloggen met telefoon goedkeuring) voor een veilig IT-landschap. Wij bieden de mogelijkheid tot Cloud Backup (die tot ver in het verleden reikt om Ransomware aan te vechten). Zien jullie, eventueel om kosten te besparen, af van deze fundamentele basisbescherming, dan accepteert de directie expliciet het risico (en de hoge kosten voor herstel).
-                    </p>
-                </div>
+                <h2 className="section-title">6. Duur van de Overeenkomst (Try & Commit)</h2>
+                <p className="question-desc" style={{ color: '#f8fafc', marginBottom: '15px' }}>
+                    We gaan in de basis een overeenkomst aan voor <strong>12 maanden</strong>.
+                </p>
+                <p className="question-desc" style={{ color: '#f8fafc' }}>
+                    Omdat we rotsvast in ons model geloven, plannen we <strong>na 6 maanden een evaluatie</strong>. We kijken dan eerlijk naar elkaar: zijn jullie blij en is de tijdbesteding zoals we hadden ingecalculeerd? Mochten we niet bij elkaar passen, kunnen we het beheer na deze 6 maanden beëindigen. (Let wel: losse softwarelicenties op jaar-termijn zullen doorlopen conform hun eigen leveranciersvoorwaarden).
+                </p>
             </div>
 
             <div style={{ textAlign: 'center', marginTop: '40px' }}>
                 <button className="submit-btn" onClick={onNavigateHome}>
-                    Ik snap het, terug naar het Intake Formulier
+                    Ideaal. Terug naar het Intake Formulier
                 </button>
             </div>
         </div>
