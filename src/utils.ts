@@ -131,7 +131,7 @@ export const generatePDF = async (clientName: string, formData: Record<string, a
         console.warn("Logo not found or could not be loaded");
     }
 
-    yPos += 15; // Extra spacing below the logo
+    yPos += 30; // Extra spacing below the logo
 
     addLine("IT SERVICE OVEREENKOMST", 18, true);
     yPos += 5;
@@ -222,9 +222,9 @@ export const generatePDF = async (clientName: string, formData: Record<string, a
     yPos += 5;
 
     try {
-        const sigBase64 = await getBase64ImageFromUrl('/signature.png');
+        const sigBase64 = await getBase64ImageFromUrl('/signature.jpg');
         // Add signature image under "Handtekening Workflo"
-        doc.addImage(sigBase64, 'PNG', 15, yPos, 40, 20);
+        doc.addImage(sigBase64, 'JPEG', 15, yPos, 40, 15);
     } catch (e) {
         console.warn("Signature not found or could not be loaded");
     }
