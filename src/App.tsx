@@ -248,6 +248,7 @@ function App() {
                                         placeholder="Jullie reactie of beleid..."
                                         value={formData[q.id] || ''}
                                         onChange={(e) => handleChange(q.id, e.target.value)}
+                                        required
                                     />
                                 )}
 
@@ -258,6 +259,7 @@ function App() {
                                         placeholder="We denken hier graag in mee. Wat is jullie visie hierop?"
                                         value={formData[q.id] || ''}
                                         onChange={(e) => handleChange(q.id, e.target.value)}
+                                        required
                                     />
                                 )}
 
@@ -271,6 +273,7 @@ function App() {
                                                     value={opt}
                                                     checked={formData[q.id] === opt}
                                                     onChange={(e) => handleChange(q.id, e.target.value)}
+                                                    required
                                                 />
                                                 {opt}
                                             </label>

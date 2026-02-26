@@ -43,10 +43,9 @@ export const defaultFormData: Record<string, any> = {
     q39: "Ja, heel graag alles onder één warm dak.",
     q42: "Ja, wij gebruiken slimme moderne oplossingen (zoals Egnyte, LycidLink of ZTNA) voor naadloze remote toegang.",
     q43: "Ja graag, en we betalen jullie met alle liefde de uren voor die ontzorging.",
-    q49: "Absoluut. We horen graag hoe jullie en wij presteren.",
-    q51: "Akkoord. Regulier support en storingen vallen binnen de fee. Excessieve structurele wijzigingen of training wordt in overleg na goedkeuring apart behandeld.",
-    q52: "Helder en volledig begrepen. Bewuste beslissingen om een risico (risk accept) te behouden, leidt tot uitsluiting van verantwoordelijkheid bij Workflo."
+    q49: "Absoluut. We horen graag hoe jullie en wij presteren."
 };
+
 
 export const formSections: Section[] = [
     {
